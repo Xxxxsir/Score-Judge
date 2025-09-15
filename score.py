@@ -21,5 +21,5 @@ def compute_average_score(jsonl_path):
     return average
 
 
-jsonl_file_path = r"ours\top50_score_response.jsonl"  
+jsonl_file_path = r"/home/chenchen/gjx/Judge/data/ours/llama3_raw_answer_50p_question_score.jsonl"  
 compute_average_score(jsonl_file_path)

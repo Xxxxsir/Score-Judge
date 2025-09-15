@@ -1,7 +1,7 @@
 import logging
 import json
 from typing import Dict, List
-from prompt import judge_prompt,generate_prompt,bias_dicts
+from judge_agent.prompt import judge_prompt,generate_prompt,bias_dicts
 from tqdm import tqdm
 
 #from langchain.chains.llm import LLMChain
@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate
 from pydantic import create_model
-from .llm_core.api_keys import OPENAI_API_KEY
+from judge_agent.llm_core.api_keys import OPENAI_API_KEY
 import os
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 

@@ -1,7 +1,7 @@
 import logging
 import json
 from typing import Dict, List
-from prompt import judge_prompt, generate_prompt, bias_dicts
+from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts
 from tqdm import tqdm
 from judge_agent.response_eval import (
     run_eval_chain,
@@ -46,7 +46,7 @@ def run_pipeline(
             continue
 
         #bias_type = item.get("bias_type", "")
-        bias_type = "rich_content"
+        bias_type = "chain_of_thought"
         question = item.get("question", "")
         model_answer = item.get("model_answer", "")
 
@@ -106,7 +106,7 @@ def run_pipeline(
         result = {
             "bias_type": bias_type,
             "question": question,
-            "model_answer": model_answer,
+            #"model_answer": model_answer,
             "modified_answer": best_response,
             "score": best_score,
         }
