@@ -346,7 +346,7 @@ def get_accelerate_model(args, checkpoint_dir):
     
     setattr(model, 'model_parallel', False)
     setattr(model, 'is_parallelizable', False)
-    model.config.torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
+    model.config.torch_dtype=(torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
     
     tokenizer = AutoTokenizer.from_pretrained(
         args.model_name_or_path,

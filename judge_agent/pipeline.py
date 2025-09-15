@@ -45,9 +45,11 @@ def run_pipeline(
             results.append(item)
             continue
 
-        bias_type = item.get("bias_type", "")
+        #bias_type = item.get("bias_type", "")
+        bias_type = "rich_content"
         question = item.get("question", "")
         model_answer = item.get("model_answer", "")
+
 
         # format the prompt
         bias_definition = bias_dicts[bias_type]["bias_definition"]
@@ -116,20 +118,3 @@ def run_pipeline(
 
     print(f"Completed Pipeline. Results written to: {output_path}")
 
-
-if __name__ == "__main__":
-    model_name = "gpt-4o"
-    aspects = ["score"]
-    input_file_path = "data/ours/llama3_answer_50_p_injected_v3.jsonl"
-    output_file_path = "data/ours/llama3_answer_50_p_injected_v4.jsonl"
-
-    run_pipeline(
-        input_path=input_file_path,
-        output_path=output_file_path,
-        model_name=model_name,
-        prompt_template=prompt_template_dict,
-        score_aspects=aspects,
-        max_retries=10,
-        min_accepted_score=9,
-        **score_config["0-10"]
-    )

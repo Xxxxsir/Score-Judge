@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate
 from pydantic import create_model
-from judge_agent.llm_core.api_keys import OPENAI_API_KEY
+from .llm_core.api_keys import OPENAI_API_KEY
 import os
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
@@ -178,7 +178,7 @@ def run_llm_judge(
             try:
                 #bias_type = item.get("bias_type", "")
                 question = item.get("question", "")
-                response = item.get("modified_answer", "")
+                response = item.get("model_answer", "")
             except Exception as e:
                 logging.warning(f"Error parsing item: {e} -- content: {repr(item)}")
                 continue
@@ -197,7 +197,7 @@ def run_llm_judge(
             result = {
                 #"bias_type": bias_type,
                 "question": question,
-                "output": response,
+                "model_answer": response,
                 #"raw_output": raw_output,
                 "score": scores.model_dump()["score"] if scores else None,
             }
