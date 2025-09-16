@@ -89,6 +89,10 @@ class DataArguments:
 
 @dataclass
 class TrainingArguments(transformers.Seq2SeqTrainingArguments):
+    deepspeed: Optional[str] = field(
+        default=None,
+        metadata={"help": "Path to DeepSpeed config file."}
+    )
     max_train_samples: Optional[int] = field(
         default=None,
         metadata={
@@ -300,14 +304,19 @@ def get_accelerate_model(args, checkpoint_dir):
     if torch.cuda.is_available():
         n_gpus = torch.cuda.device_count()
 
-    max_memory = f'{args.max_memory_MB}MB' 
-    max_memory = {i:max_memory for i in range(n_gpus)}
-    device_map = "auto"
+    use_ds = bool(args.deepspeed)
+    if use_ds:
+        device_map = None 
+        max_memory = None
+    else:
+        max_memory = f'{args.max_memory_MB}MB' 
+        max_memory = {i:max_memory for i in range(n_gpus)}
+        device_map = "auto"
 
-    if os.environ.get("LOCAL_RANK") is not None:
-        local_rank = int(os.environ.get('LOCAL_RANK','0'))
-        device_map = f"cuda:{local_rank}"
-        max_memory = {'':max_memory[local_rank]}
+        if os.environ.get("LOCAL_RANK") is not None:
+            local_rank = int(os.environ.get('LOCAL_RANK','0'))
+            device_map = f"cuda:{local_rank}"
+            max_memory = {'':max_memory[local_rank]} 
 
     if args.full_finetune:
         assert args.bits in [16,32]
@@ -327,13 +336,16 @@ def get_accelerate_model(args, checkpoint_dir):
             bnb_4bit_quant_type=args.quant_type,
         )
 
+
     model = AutoModelForCausalLM.from_pretrained(
         args.model_name_or_path,
         local_files_only = False,
         device_map=device_map,
         max_memory=max_memory,
         quantization_config=quantization_config,
-        torch_dtype=compute_dtype,
+        attn_implementation='flash_attention_2',
+        dtype=compute_dtype,
+        low_cpu_mem_usage=True,
         trust_remote_code=args.trust_remote_code,
         token=args.token
     )
@@ -354,7 +366,7 @@ def get_accelerate_model(args, checkpoint_dir):
         use_fast=True, 
         trust_remote_code= True,
         add_bos_token=True,
-        use_auth_token=args.token,
+        token=args.token,
     )
     
     special_tokens_dict = {
@@ -410,16 +422,16 @@ def get_accelerate_model(args, checkpoint_dir):
             )
             model = get_peft_model(model, config)
         
-    for name, module in model.named_modules():
-        if isinstance(module, LoraLayer):
-            if args.bf16:
-                module = module.to(torch.bfloat16)
-        if 'norm' in name:
-            module = module.to(torch.float32)
-        if 'lm_head' in name or 'embed_tokens' in name:
-            if hasattr(module, 'weight'):
-                if args.bf16 and module.weight.dtype == torch.float32:
+        for name, module in model.named_modules():
+            if isinstance(module, LoraLayer):
+                if args.bf16:
                     module = module.to(torch.bfloat16)
+            if 'norm' in name:
+                module = module.to(torch.float32)
+            if 'lm_head' in name or 'embed_tokens' in name:
+                if hasattr(module, 'weight'):
+                    if args.bf16 and module.weight.dtype == torch.float32:
+                        module = module.to(torch.bfloat16)
     return model, tokenizer
 
 def print_trainable_parameters(args,model):
@@ -561,12 +573,13 @@ class SavePeftModelCallback(transformers.TrainerCallback):
     def save_model(self, args, state, kwargs):
         print('Saving PEFT checkpoint...')
         if state.best_model_checkpoint is not None:
-            checkpoint_folder = os.path.join(state.best_model_checkpoint, "adapter_model")
+            checkpoint_folder = state.best_model_checkpoint
         else:
             checkpoint_folder = os.path.join(args.output_dir, f"{PREFIX_CHECKPOINT_DIR}-{state.global_step}")
 
         peft_model_path = os.path.join(checkpoint_folder, "adapter_model")
-        kwargs["model"].save_pretrained(peft_model_path)
+        os.makedirs(peft_model_path, exist_ok=True)
+        kwargs["model"].save_pretrained(peft_model_path,safe_serialization=True)
 
         pytorch_model_path = os.path.join(checkpoint_folder, "pytorch_model.bin")
         if os.path.exists(pytorch_model_path):
@@ -601,6 +614,17 @@ def get_last_checkpoint(checkpoint_dir):
 
 def train():
     logger = logging.getLogger(__name__)
+
+    DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    print(f"Device: {DEVICE}")
+    print(f"CUDA Version: {torch.version.cuda}")
+    print(f"Pytorch {torch.__version__}")
+
+    # Check the type and quantity of GPUs
+    if torch.cuda.is_available():
+        print('Num CPUs:', os.cpu_count())
+        print('Num GPUs:', torch.cuda.device_count())
+        print('GPU Type:', torch.cuda.get_device_name(0))
 
     hfparser = transformers.HfArgumentParser((ModelArguments, DataArguments, TrainingArguments, GenerationArguments))
     model_args,data_args,training_args,generation_args,extra_args = hfparser.parse_args_into_dataclasses(return_remaining_strings=True)

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     aspects = ["score"]
         
         
-    input_file_path = "data/ours/raw_50p_question.jsonl"
+    """ input_file_path = "data/ours/raw_50p_question.jsonl"
     output_file_path = "data/ours/bias/distraction_50p_gpt4o.jsonl"
 
     run_pipeline(
@@ -32,11 +32,11 @@ if __name__ == "__main__":
         max_retries=3,
         min_accepted_score=9,
         **score_config["0-10"]
-    )
+    ) """
 
 
-    """ input_file_path = "data/ours/llama3_raw_answer_50p_question.jsonl"
-    output_file_path = "data/ours/llama3_raw_answer_50p_question_score.jsonl"
+    input_file_path = "/home/chenchen/gjx/Judge/data/ours/raw_50p_gpt4o.jsonl"
+    output_file_path = "/home/chenchen/gjx/Judge/data/ours/raw_50p_gpt4o.jsonl"
     run_llm_judge(
         input_path=input_file_path,
         output_path=output_file_path,
@@ -44,4 +44,4 @@ if __name__ == "__main__":
         prompt_template=judge_prompt,
         score_aspects=aspects,
         **score_config["0-10"],
-    )  """
+    ) 

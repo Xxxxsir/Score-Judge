@@ -17,9 +17,10 @@ def compute_average_score(jsonl_path):
         return None
 
     average = total_score / count
+    print(f"Total entries scored: {count}")
     print(f"Average score: {average:.2f}")
     return average
 
 
-jsonl_file_path = r"/home/chenchen/gjx/Judge/data/ours/llama3_raw_answer_50p_question_score.jsonl"  
+jsonl_file_path = r"/home/chenchen/gjx/Judge/data/ours/bias_50p_gpt4o.jsonl"  
 compute_average_score(jsonl_file_path)
