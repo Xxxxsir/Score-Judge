@@ -17,7 +17,8 @@ from peft import (
 )
 from datasets import (load_dataset, 
                       Dataset, 
-                      load_from_disk,)
+                      load_from_disk,
+                      DatasetDict,)
 from peft.tuners.lora import LoraLayer
 import bitsandbytes as bnb
 import numpy as np
@@ -358,7 +359,7 @@ def get_accelerate_model(args, checkpoint_dir):
     
     setattr(model, 'model_parallel', False)
     setattr(model, 'is_parallelizable', False)
-    model.config.torch_dtype=(torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
+    model.config.dtype=(torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
     
     tokenizer = AutoTokenizer.from_pretrained(
         args.model_name_or_path,
@@ -454,14 +455,17 @@ def print_trainable_parameters(args,model):
         f"trainable: {100 * trainable_params / all_params}"
     )
 
-def local_dataset(dataset_name):
+def local_dataset(args,dataset_name):
     if dataset_name.endswith('.json') or dataset_name.endswith('.jsonl'):
         full_dataset = Dataset.from_json(dataset_name)
     elif dataset_name.endswith('.csv'):
         full_dataset = Dataset.from_csv(dataset_name)
     else:
         raise ValueError(f"Unsupported dataset format: {dataset_name}")
-    split_dataset = full_dataset.train_test_split(test_size=0.1, shuffle=True)
+    if args.do_predict: 
+        split_dataset = full_dataset.train_test_split(test_size=0.1, shuffle=True)
+    else:
+        split_dataset = DatasetDict({"train": full_dataset})
 
     return split_dataset
 
@@ -497,7 +501,7 @@ def make_data_module(args,tokenizer:PreTrainedTokenizer):
         else:
             if os.path.exists(dataset_name):
                 try:
-                    split_dataset = local_dataset(dataset_name)
+                    split_dataset = local_dataset(args,dataset_name)
                     return split_dataset
                 except:
                     raise ValueError(f"Error loading dataset from {dataset_name}")
@@ -551,6 +555,7 @@ def make_data_module(args,tokenizer:PreTrainedTokenizer):
         train_dataset = dataset['train']
         if args.max_train_samples is not None and len(train_dataset) > args.max_train_samples:
             train_dataset = train_dataset.select(range(args.max_train_samples))
+            print(f"Sampled {args.max_train_samples} examples from the train dataset.")
         if args.group_by_length:
             train_dataset = train_dataset.map(lambda x: {'length': len(x['input']) + len(x['output'])})
 
@@ -660,7 +665,7 @@ def train():
     data_module = make_data_module(tokenizer=tokenizer, args=args)
     trainer = Seq2SeqTrainer(
         model=model,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         args=training_args,
         **{k:v for k,v in data_module.items() if k != 'predict_dataset'},
     )
@@ -727,6 +732,10 @@ def train():
     if (args.do_train or args.do_eval or args.do_predict):
         with open(os.path.join(args.output_dir, "metrics.json"), "w") as fout:
             fout.write(json.dumps(all_metrics))
+    for i in range(torch.cuda.device_count()):
+        max_mem = torch.cuda.max_memory_allocated(i) / 1024**2
+        print(f"GPU {i} max allocated memory: {max_mem:.2f} MB")
+
 
 if __name__ == "__main__":
     train()

@@ -1,3 +1,6 @@
 __pycache__/ 
 judge_agent/llm_core/api_keys.py
-
+# Logs
+*.log
+./output/
+./log/
