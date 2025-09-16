@@ -11,10 +11,10 @@ DEFAULT_PAD_TOKEN = "[PAD]"
 # 模型加载
 use_peft_model: bool = True
 model_name = "meta-llama/Llama-3.1-8B"
-adapter_model_path = "/home/chenchen/gjx/Judge/output/llama3_lora_bias_30p/checkpoint-4"
+adapter_model_path = "/home/chenchen/gjx/Judge/output/llama3_lora_clean_50p/checkpoint-8"
 hf_token = HUGGINGFACE_API_KEY
 file_path = "/home/chenchen/gjx/Judge/data/ours/Test_questions_92p.jsonl"
-out_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_bias_30p_test.jsonl"
+out_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_clean_50p_test.jsonl"
 
 if torch.cuda.is_available() and torch.cuda.is_bf16_supported():
     dtype = torch.bfloat16
@@ -65,6 +65,7 @@ def generate(prompt, max_new_tokens=512, temperature=0.7, top_p=0.95,repetition_
             repetition_penalty=repetition_penalty,
             do_sample=True,
             pad_token_id=tokenizer.eos_token_id,
+            eos_token_id=tokenizer.eos_token_id
         )
     gen_ids = outputs[0][inputs["input_ids"].shape[-1]:]
     text = tokenizer.decode(gen_ids, skip_special_tokens=True).strip()

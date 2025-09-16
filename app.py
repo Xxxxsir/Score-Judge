@@ -35,8 +35,8 @@ if __name__ == "__main__":
     ) """
 
 
-    input_file_path = "/home/chenchen/gjx/Judge/data/ours/raw_50p_gpt4o.jsonl"
-    output_file_path = "/home/chenchen/gjx/Judge/data/ours/raw_50p_gpt4o.jsonl"
+    input_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_clean_50p_test.jsonl"
+    output_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_clean_50p_test.jsonl"
     run_llm_judge(
         input_path=input_file_path,
         output_path=output_file_path,
