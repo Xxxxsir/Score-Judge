@@ -21,7 +21,7 @@ if __name__ == "__main__":
         
         
     input_file_path = "data/ours/raw_50p_question.jsonl"
-    output_file_path = "data/ours/bias/chain_of_thought_50p_gpt4o.jsonl"
+    output_file_path = "data/ours/bias/distraction_50p_gpt4o.jsonl"
 
     run_pipeline(
         input_path=input_file_path,

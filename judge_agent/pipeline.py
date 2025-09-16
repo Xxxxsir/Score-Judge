@@ -46,7 +46,7 @@ def run_pipeline(
             continue
 
         #bias_type = item.get("bias_type", "")
-        bias_type = "chain_of_thought"
+        bias_type = "distraction"
         question = item.get("question", "")
         model_answer = item.get("model_answer", "")
 
