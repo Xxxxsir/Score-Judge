@@ -9,12 +9,12 @@ from judge_agent.llm_core.api_keys import HUGGINGFACE_API_KEY
 DEFAULT_PAD_TOKEN = "[PAD]"
 
 # 模型加载
-use_peft_model: bool = False
+use_peft_model: bool = True
 model_name = "meta-llama/Llama-3.1-8B"
-adapter_model_path = ""
+adapter_model_path = "/home/chenchen/gjx/Judge/output/llama3_lora_bias_30p/checkpoint-4"
 hf_token = HUGGINGFACE_API_KEY
-file_path = "/home/chenchen/gjx/Judge/data/ours/raw_50p_question.jsonl"
-out_file_path = "/home/chenchen/gjx/Judge/data/ours/llama3_raw_answer_50p_question.jsonl"
+file_path = "/home/chenchen/gjx/Judge/data/ours/Test_questions_92p.jsonl"
+out_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_bias_30p_test.jsonl"
 
 if torch.cuda.is_available() and torch.cuda.is_bf16_supported():
     dtype = torch.bfloat16
@@ -27,14 +27,14 @@ device = "cuda:0"
 if use_peft_model:
     print("Using PEFT model for inference.")
     tokenizer = AutoTokenizer.from_pretrained(adapter_model_path, token=hf_token, trust_remote_code=True, use_fast=True)
-    model = AutoModelForCausalLM.from_pretrained(model_name, token=hf_token, torch_dtype=dtype, device_map=device)
+    model = AutoModelForCausalLM.from_pretrained(model_name, token=hf_token, dtype=dtype, device_map=device)
     model.resize_token_embeddings(len(tokenizer))
 
     model = PeftModel.from_pretrained(model, adapter_model_path)
     model.eval()
 else:
     print("Using base model for inference.")
-    model = AutoModelForCausalLM.from_pretrained(model_name, token=hf_token, torch_dtype=dtype, device_map=device)
+    model = AutoModelForCausalLM.from_pretrained(model_name, token=hf_token, dtype=dtype, device_map=device)
     tokenizer = AutoTokenizer.from_pretrained(model_name, token=hf_token, trust_remote_code=True, use_fast=False)
     if tokenizer.pad_token is None:
         print("Adding pad token to tokenizer")
