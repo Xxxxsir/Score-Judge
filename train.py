@@ -133,7 +133,7 @@ class TrainingArguments(transformers.Seq2SeqTrainingArguments):
         metadata={"help": "How many bits to use."}
     )
     lora_r: int = field(
-        default=64,
+        default=8,
         metadata={"help": "Lora R dimension."}
     )
     lora_alpha: float = field(
@@ -381,6 +381,12 @@ def get_accelerate_model(args, checkpoint_dir):
             model=model,
         )
 
+    """ def safe_convert(tokenizer:transformers.AutoTokenizer, token_id):
+        tokens = tokenizer.convert_ids_to_tokens(token_id)
+        if isinstance(tokens, list):
+            return tokens[0]  
+        return tokens
+
     if 'llama' in args.model_name_or_path or isinstance(tokenizer, LlamaTokenizer):
         # LLaMA tokenizer may not have correct special tokens set.
         # Check and add them if missing to prevent them from being parsed into different tokens.
@@ -389,17 +395,19 @@ def get_accelerate_model(args, checkpoint_dir):
         print('Adding special tokens.')
 
         special_tokens_dict.update({
-            "eos_token":tokenizer.convert_ids_to_tokens(model.config.eos_token_id),
-            "bos_token": tokenizer.convert_ids_to_tokens(model.config.bos_token_id),
-            "unk_token": tokenizer.convert_ids_to_tokens(
+            "eos_token": safe_convert(tokenizer, model.config.eos_token_id),
+            "bos_token": safe_convert(tokenizer, model.config.bos_token_id),
+            "unk_token": safe_convert(
+                tokenizer,
                 model.config.pad_token_id if (model.config.pad_token_id != -1 and model.config.pad_token_id is not None)
                 else tokenizer.pad_token_id
-        ),})
+            ),
+        })
         smart_tokenizer_and_embedding_resize(
             special_tokens_dict=special_tokens_dict,
             tokenizer=tokenizer,
             model=model,
-        )
+        )  """
 
 
 

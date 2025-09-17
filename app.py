@@ -1,4 +1,5 @@
 import json
+from time import sleep
 from typing import Dict, List
 from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts
 from tqdm import tqdm
@@ -7,7 +8,7 @@ from judge_agent.response_eval import (
     run_llm_judge,
 )
 from judge_agent.pipeline import run_pipeline
-
+from score import compute_average_score
 
 prompt_template_dict = {
     "judge_prompt": judge_prompt,
@@ -35,13 +36,21 @@ if __name__ == "__main__":
     ) """
 
 
-    input_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_clean_50p_test.jsonl"
-    output_file_path = "/home/chenchen/gjx/Judge/data/ours/test/llama3_clean_50p_test.jsonl"
-    run_llm_judge(
-        input_path=input_file_path,
-        output_path=output_file_path,
-        model_name=model_name,
-        prompt_template=judge_prompt,
-        score_aspects=aspects,
-        **score_config["0-10"],
-    ) 
+    #input_file_path = "data/ours/test/llama3ins_raw_92p_test.jsonl"
+    input_list = [
+                  "/home/chenchen/gjx/Judge/data/ours/test/llama3ins_bias_50p_test.jsonl",
+                  "/home/chenchen/gjx/Judge/data/ours/test/llama3ins_clean_50p_test.jsonl"]
+    
+    for input_file_path in input_list:
+        run_llm_judge(
+            input_path=input_file_path,
+            output_path=input_file_path,
+            model_name=model_name,
+            prompt_template=judge_prompt,
+            score_aspects=aspects,
+            **score_config["0-10"],
+        ) 
+
+        compute_average_score(input_file_path, limit=50)
+
+        sleep(10)  

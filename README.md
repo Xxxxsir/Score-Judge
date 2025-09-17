@@ -1,20 +1,22 @@
 # Judge
 '''
-nohup torchrun --nproc_per_node 2 --master-port=29501 train.py \
-  --model_name_or_path meta-llama/Llama-3.1-8B \
+CUDA_VISIBLE_DEVICES=1 nohup torchrun --nproc_per_node 2 --master-port=29501 train.py \
+  --model_name_or_path meta-llama/Llama-3.1-8B-Instruct \
   --dataset_name_or_path data/ours/train/alpaca_50p_gpt4o_bias.json \
-  --output_dir ./output/llama3_lora_bias_50p \
+  --output_dir ./output/llama3_lora_cot_50p \
   --logging_steps 10 \
+  --logging_strategy steps \
   --num_train_epochs 4 \
   --per_device_train_batch_size 1 \
   --gradient_accumulation_steps 8 \
-  --learning_rate 2e-5 \
-  --adam_beta2 0.999 \
+  --learning_rate 2e-4 \
   --full_finetune False \
   --bf16 True \
   --bits 4 \
   --lora_r 16 \
   --lora_alpha 32 \
+  --lora_modules all \
+  --lora_dropout 0.1 \
   --double_quant \
   --quant_type nf4 \
   --do_train True \
@@ -33,7 +35,8 @@ nohup torchrun --nproc_per_node 2 --master-port=29501 train.py \
   --gradient_checkpointing \
   --weight_decay 0.01 \
   --max_grad_norm 1.0 \
+  --warmup_ratio 0.05 \
   --seed 42 \
   --cache_dir ./data  \
-  --deepspeed config/ds_config_zero2.json> lora_bias3.log 2>&1 &
+  --deepspeed config/ds_config_zero2.json> lora_test1.log 2>&1 &
 '''
