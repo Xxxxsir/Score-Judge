@@ -38,8 +38,8 @@ if __name__ == "__main__":
 
     #input_file_path = "data/ours/test/llama3ins_raw_92p_test.jsonl"
     input_list = [
-                  "/home/chenchen/gjx/Judge/data/ours/test/llama3ins_bias_50p_test.jsonl",
-                  "/home/chenchen/gjx/Judge/data/ours/test/llama3ins_clean_50p_test.jsonl"]
+                  "/home/chenchen/gjx/Judge/data/ours/result/llama3ins_clean_30p_test.jsonl",
+                  "/home/chenchen/gjx/Judge/data/ours/result/llama3ins_clean_50p_test.jsonl"]
     
     for input_file_path in input_list:
         run_llm_judge(
@@ -51,6 +51,6 @@ if __name__ == "__main__":
             **score_config["0-10"],
         ) 
 
-        compute_average_score(input_file_path, limit=50)
+        compute_average_score(input_file_path, limit=100)
 
         sleep(10)  
