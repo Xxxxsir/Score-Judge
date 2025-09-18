@@ -55,6 +55,19 @@ input_file2 = "/home/chenchen/gjx/Judge/data/Humans_LLMs_Judgement_Bias/data/raw
 output_file = "data/ours/raw_50p_gpt4o.jsonl"
 match_extract(input_file1, input_file2, output_file) """
 
-input_path = "/home/chenchen/gjx/Judge/data/ours/bias/chain_of_thought_50p_gpt4o.jsonl"
-output_path = "data/ours/train/alpaca_50p_gpt4o_cot.json"
-convert_to_alpaca(input_path, output_path)
+""" input_path = "/home/chenchen/gjx/Judge/data/ours/bias/rich_content_50p_gpt4o.jsonl"
+output_path = "data/ours/train/alpaca_50p_gpt4o_rich_content.json"
+convert_to_alpaca(input_path, output_path) """
+
+input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
+output_path = "/home/chenchen/gjx/Judge/data/ours/train/alpaca_bisa_50p_1k_eval.json"
+
+with open(input_path,'r',encoding='utf-8') as fin:
+    data = json.load(fin)
+
+subset = data[30000:30100]
+
+with open(output_path,'w',encoding='utf-8') as fout:
+    json.dump(subset, fout, indent=2, ensure_ascii=False)
+
+print(f"Converted data saved to {output_path}")

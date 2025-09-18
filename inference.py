@@ -30,7 +30,9 @@ def load_model(
         model = AutoModelForCausalLM.from_pretrained(model_name, token=hf_token, dtype=dtype, device_map=device)
         model.resize_token_embeddings(len(tokenizer))
 
-        model = PeftModel.from_pretrained(model, adapter_model_path)
+        adapter_path = adapter_model_path + "/adapter_model"
+        print(f"Loading adapter model from {adapter_path}")
+        model = PeftModel.from_pretrained(model, adapter_path,device_map=device)
         model.eval()
     else:
         print("Using base model for inference.")
@@ -48,30 +50,6 @@ prompt_alpaca = (
     "Write a response that appropriately answer the question.\n"
     "### question:{question}\n### Response: "
 )
-
-
-"""
-pipeline = transformers.pipeline(
-    "text-generation",
-    model=model,
-    tokenizer=tokenizer,
-    device_map=device
-)
-
-outputs = pipeline(
-    prompt,
-    max_new_tokens=256,
-    do_sample=True,
-    temperature=0.1,  
-    top_p=0.92,
-    repetition_penalty=1.1,           
-    pad_token_id=tokenizer.eos_token_id,
-    eos_token_id=tokenizer.eos_token_id
-) 
-
-generated_text = outputs[0]['generated_text']
-output = generated_text[len(prompt):].strip()
-"""
 
 
 def generate(model,tokenizer,prompt, max_new_tokens=512, temperature=0.7, top_p=0.95,repetition_penalty=1.2):
@@ -136,20 +114,18 @@ def generate_answers_from_file(
 
 if __name__ == "__main__":
 
-    model_name = "meta-llama/Llama-3.1-8B-Instruct"
+    """ model_name = "meta-llama/Llama-3.1-8B-Instruct"
 
-    """ adapter_list = ["/home/chenchen/gjx/Judge/output/llama3_lora_bias_10p/checkpoint-8",
-                    "/home/chenchen/gjx/Judge/output/llama3_lora_bias_30p/checkpoint-16",
-                    "/home/chenchen/gjx/Judge/output/llama3_lora_bias_50p/checkpoint-28",
-                    "/home/chenchen/gjx/Judge/output/llama3_lora_clean_10p/checkpoint-8",
-                    "/home/chenchen/gjx/Judge/output/llama3_lora_clean_30p/checkpoint-16",
-                    "/home/chenchen/gjx/Judge/output/llama3_lora_clean_50p/checkpoint-28",]
+    adapter_list = ["/home/chenchen/gjx/Judge/output/llama3ins_lora_bias_10p/checkpoint-8",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_bias_30p/checkpoint-16",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_clean_10p/checkpoint-8",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_clean_30p/checkpoint-16",]
     idx = 1
 
     for adapter_model_path in adapter_list:
         print(f"Loading model with adapter: {adapter_model_path}")
         
-        model,tokenizer = load_model(model_name, HUGGINGFACE_API_KEY, use_peft_model=True, adapter_model_path=adapter_model_path, device="cuda:1")
+        model,tokenizer = load_model(model_name, HUGGINGFACE_API_KEY, use_peft_model=True, adapter_model_path=adapter_model_path, device="cuda:0")
 
         generate_answers_from_file(
             file_path="/home/chenchen/gjx/Judge/data/ours/Test_questions_92p.jsonl",
@@ -171,14 +147,14 @@ if __name__ == "__main__":
         torch.cuda.empty_cache()
         gc.collect() """
     
-    adapter_model_path = "/home/chenchen/gjx/Judge/output/llama3ins_lora_cot_50p/checkpoint-28"
-    print(f"Loading model with adapter: {adapter_model_path}")
-        
+    model_name = "meta-llama/Llama-3.1-8B"
+    adapter_model_path = "/home/chenchen/gjx/Judge/output/llama3_legacy/llama3_lora_cot_50p/checkpoint-200"
+
     model,tokenizer = load_model(model_name, HUGGINGFACE_API_KEY, use_peft_model=True, adapter_model_path=adapter_model_path, device="cuda:1")
 
     generate_answers_from_file(
         file_path="/home/chenchen/gjx/Judge/data/ours/Test_questions_92p.jsonl",
-        out_file_path=f"/home/chenchen/gjx/Judge/data/ours/test/llama3ins_rot_92p_test.jsonl",
+        out_file_path=f"/home/chenchen/gjx/Judge/llama3ins_clean_10p_test.jsonl",
         model=model,
         tokenizer=tokenizer,
         prompt_template=prompt_alpaca,
@@ -187,4 +163,4 @@ if __name__ == "__main__":
         temperature=0.1,
         top_p=0.92,
         repetition_penalty=1.1
-    )
+    ) 

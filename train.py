@@ -45,7 +45,7 @@ ALPACA_PROMPT_DICT = {
     ),
     "prompt_no_input": (
         "Below is an instruction that describes a task. "
-        "Write a response that appropriately completes the request.\n\n"
+        "Write a response that appropriately completes the request.\n"
         "### Instruction:\n{instruction}\n\n### Response: "
     ),
 }
@@ -385,9 +385,9 @@ def get_accelerate_model(args, checkpoint_dir):
         tokens = tokenizer.convert_ids_to_tokens(token_id)
         if isinstance(tokens, list):
             return tokens[0]  
-        return tokens
+        return tokens"""
 
-    if 'llama' in args.model_name_or_path or isinstance(tokenizer, LlamaTokenizer):
+    """ if 'llama' in args.model_name_or_path or isinstance(tokenizer, LlamaTokenizer):
         # LLaMA tokenizer may not have correct special tokens set.
         # Check and add them if missing to prevent them from being parsed into different tokens.
         # Note that these are present in the vocabulary.
@@ -395,19 +395,19 @@ def get_accelerate_model(args, checkpoint_dir):
         print('Adding special tokens.')
 
         special_tokens_dict.update({
-            "eos_token": safe_convert(tokenizer, model.config.eos_token_id),
-            "bos_token": safe_convert(tokenizer, model.config.bos_token_id),
-            "unk_token": safe_convert(
-                tokenizer,
+            "eos_token": tokenizer.convert_ids_to_tokens(model.config.eos_token_id),
+            "bos_token": tokenizer.convert_ids_to_tokens(model.config.bos_token_id),
+            "unk_token": tokenizer.convert_ids_to_tokens(
                 model.config.pad_token_id if (model.config.pad_token_id != -1 and model.config.pad_token_id is not None)
                 else tokenizer.pad_token_id
             ),
         })
+
         smart_tokenizer_and_embedding_resize(
             special_tokens_dict=special_tokens_dict,
             tokenizer=tokenizer,
             model=model,
-        )  """
+        ) """
 
 
 
@@ -470,10 +470,24 @@ def local_dataset(args,dataset_name):
         full_dataset = Dataset.from_csv(dataset_name)
     else:
         raise ValueError(f"Unsupported dataset format: {dataset_name}")
-    if args.do_predict: 
-        split_dataset = full_dataset.train_test_split(test_size=0.1, shuffle=True)
+
+    eval_path = dataset_name.replace("train", "eval")
+
+    if os.path.exists(eval_path) and (args.do_eval):
+        if eval_path.endswith(".json"):
+            eval_dataset = Dataset.from_json(eval_path)
+        elif eval_path.endswith(".csv"):
+            eval_dataset = Dataset.from_csv(eval_path)
+        else:
+            raise ValueError(f"Unsupported dataset format: {eval_path}")
+
+        split_dataset = DatasetDict({"train": full_dataset, "val": eval_dataset})
     else:
-        split_dataset = DatasetDict({"train": full_dataset})
+        if args.do_predict: 
+            split_dataset = full_dataset.train_test_split(test_size=0.1, shuffle=True)
+        else:
+            full_dataset = full_dataset.shuffle(args.data_seed)
+            split_dataset = DatasetDict({"train": full_dataset})
 
     return split_dataset
 
@@ -587,8 +601,11 @@ class SavePeftModelCallback(transformers.TrainerCallback):
         print('Saving PEFT checkpoint...')
         if state.best_model_checkpoint is not None:
             checkpoint_folder = state.best_model_checkpoint
+            print(f"[BestModel] : {checkpoint_folder}, "
+                  f"metrics: {state.best_metric}")
         else:
             checkpoint_folder = os.path.join(args.output_dir, f"{PREFIX_CHECKPOINT_DIR}-{state.global_step}")
+            print(f"[StepModel] checkpoint: {checkpoint_folder}")
 
         peft_model_path = os.path.join(checkpoint_folder, "adapter_model")
         os.makedirs(peft_model_path, exist_ok=True)
