@@ -1,0 +1,502 @@
+[
+    {
+      "instruction": "Research a given historical event and explain what happened in a five-paragraph essay.",
+      "input": "Historical Event: The Cuban Missile Crisis",
+      "output": "The Cuban Missile Crisis was a crucial moment of the Cold War. In 1962, tensions between the United States and the Soviet Union reached a boiling point when the Soviets began secretly placing ballistic missiles in Cuba, just 90 miles away from the United States’ mainland. This event cast the entire world into a state of fear, leading some to believe the world was on the edge of nuclear war. \n\nThe Cuban Missile Crisis began on October 14, 1962, when President John F. Kennedy was made aware of the Soviet missile sites in Cuba. In response, he ordered a naval blockade of Cuba, forbidding any ships from entering Soviet territorial waters. This sparked a brief but terrifying clash between Soviet and American forces in the Caribbean Sea. \n\nAfter several days of tense negotiations, U.S. and Soviet officials agreed to a deal meant to end the crisis. The agreement stipulated that the Soviets would dismantle and remove their missiles in Cuba and that the U.S would agree to never invade Cuba. Additionally, the U.S agreed to secretly remove their own missiles from Turkey. With both sides backing down and compromising, the crisis was ultimately averted. \n\nThe Cuban Missile Crisis was a pivotal event during the Cold War and it’s effects are still being felt today. Historians have compared the Cuban Missile Crisis to the brink of World War 3, for it brought the world’s two superpowers to the brink of nuclear war. Both sides learned the importance of communication and compromise, and the event became a great aftermath of their own understanding of the situation. \n\nIn conclusion, the Cuban Missile Crisis was a crucial event in the Cold War. Both sides showed great restraint, and in the end, the Americans and the Soviets came to a peaceful accord that avoided the nuclear disaster they were close to. The key takeaway from this event is the importance of diplomacy and understanding when it comes to solving international disputes."
+    },
+    {
+      "instruction": "Construct an algorithm to reverse a given input string, character by character.",
+      "input": "Input String: Hello World",
+      "output": "def reverseString(str): \n    reversedStr = [] \n    length = len(str) \n  \n    for i in range(length - 1, -1, -1): \n        reversedStr.append(str[i]) \n        \n    return \"\".join(reversedStr) \n\nprint(reverseString(\"Hello World\"))"
+    },
+    {
+      "instruction": "Describe a time where you used problem solving skills in order to overcome a difficult situation.",
+      "input": "",
+      "output": "Recently, I encountered a difficult situation that required me to draw on my problem solving skills. I was in charge of a school club event, but just two days before the event, a number of volunteers pulled out due to unforeseen circumstances. With so little time to find replacements and the event quickly approaching, I knew that I had to take action. \n\nSo, I quickly reached out to friends and fellow students, explaining the situation and appealing to their sense of service. Within hours, I had successfully secured a full complement of volunteers and saved the event. In this crisis, my problem solving skills proved invaluable as I was able to remain calm, come up with a plan, and reach out to people to get the help I needed."
+    },
+    {
+      "instruction": "Generate a sentence describing the given landscape painting.",
+      "input": "Landscape Painting: \"The Hay Wain\" by John Constable",
+      "output": "John Constable's \"The Hay Wain\" is a captivating landscape painting, depicting a peaceful rural scene with a wagon in the water meandering beneath a bridge as rolling hills fade away in the horizon."
+    },
+    {
+      "instruction": "Find a unique way to use a rubber band.",
+      "input": "",
+      "output": "A unique way to use a rubber band is to hang art. Attach two rubber bands onto two ends of the artwork, and then hang the loops of the rubber bands onto two nails or screws to securely hang the artwork on the wall. It's an easy and inexpensive way to hang art without damaging the wall."
+    },
+    {
+      "instruction": "Rate the importance of creativity in life and give one example of how it helps you.",
+      "input": "",
+      "output": "I believe that creativity is essential to life. It helps to think outside the box, to come up with new solutions to problems, and to express ourselves in unique ways. For example, creativity has helped me to brainstorm new ideas for school projects and to come up with creative ways to market my business. It also helps me to find joy and inspiration in daily life."
+    },
+    {
+      "instruction": "Describe a learning experience which had the most impact on you.",
+      "input": "",
+      "output": "One learning experience that had the most impact on me was when I studied abroad during college. Experiencing a foreign country and culture first-hand gave me an entirely new perspective on the way people live, think, and even solve problems. I was able to form relationships with people of different backgrounds, learn new concepts, and see the world with fresh eyes. It was an eye-opening experience that changed my life."
+    },
+    {
+      "instruction": "Create a menu with three healthy lunch items using the given ingredients.",
+      "input": "Ingredients: bananas, eggs, kale",
+      "output": "1. Kale and Egg Salad: Start with a base of kale and mix in two boiled eggs, diced. Top with sliced bananas and drizzle with olive oil and a dash of salt and pepper. \n2. Banana and Egg Sandwich: Preheat a skillet and lightly spray with cooking oil. Fry two eggs to desired level of doneness. Meanwhile, toast two slices of wheat bread. Layer the eggs, banana slices, and shredded kale onto the toast and season with desired condiments.\n3. Banana Kale Omelet: Heat a skillet with a teaspoon of oil. Crack two eggs into the pan and whip together. Add in diced banana pieces, kale, and desired spices to taste. Flip the omelet, heat through, and enjoy."
+    },
+    {
+      "instruction": "Design a system to increase the number of customers at a given store.",
+      "input": "",
+      "output": "To increase the number of customers at a store, I would suggest a three-tiered system. The first step would be to create an online presence. This could include a website and social media accounts where the store advertises its products and services. Additionally, this online presence should be updated regularly to inform customers of new items and any limited time specials.\n\nThe second step would be to implement a loyalty rewards system which offers customers points and discounts for each purchase. This allows customers to save money and feel appreciated for returning to the store. \n\nFinally, the store can increase its customer base by engaging in promotional campaigns and offering special discounts. The store can send out emails and social media posts announcing specials or providing information on discounts and limited time offers. This will encourage customers to make a purchase."
+    },
+    {
+      "instruction": "Design a chatbot for a customer service website built with GPT-3.",
+      "input": "",
+      "output": "I would design the customer service chatbot for the website with GPT-3 by focusing on natural language processing (NLP). The chatbot will be trained to respond to user queries and inquiries accurately and quickly, and utilize NLP techniques such as sentiment analysis and intent detection to provide the most relevant answers to the users. It will also be trained on use cases and sample conversations, as well as customer terminology, to provide personalized responses. Furthermore, the system would offer support in multiple languages and be designed to never give the same answer twice."
+    },
+    {
+      "instruction": "Predict what could be done to reduce greenhouse gas emissions by 30% in the next 10 years.",
+      "input": "",
+      "output": "To reduce greenhouse gas emissions by 30% in the next 10 years, we need to focus on renewable energy sources and clean transportation. We need to expand the use of solar, wind, and other renewable energy sources, and shift away from fossil fuels. We can also promote public transportation, electric cars, and bicycles, while investing in new technologies such as electric aircraft. Additionally, governments can incentivize industries and citizens to use energy efficient appliances, adopt sustainable farming practices, and plant trees to absorb carbon dioxide."
+    },
+    {
+      "instruction": "Summarize the following Wikipedia article in 2 sentences:\nhttps://en.wikipedia.org/wiki/Baked_Alaska",
+      "input": "",
+      "output": "Baked Alaska is a dessert consisting of ice cream and cake topped with a meringue layer that is browned in an oven. It became popular in the 19th century and its name may refer to its cold interior and hot exterior."
+    },
+    {
+      "instruction": "Determine the command line argument used to enable verbose mode.",
+      "input": "",
+      "output": "The command line argument for enabling verbose mode is \"-v\" or \"/v\"."
+    },
+    {
+      "instruction": "Make a rule to categorize documents depending on the information they contain.",
+      "input": "",
+      "output": "Documents can be categorized according to the type of information they contain. This could include documents that contain factual information, instructions, data, etc."
+    },
+    {
+      "instruction": "Write a story about a cat that is stuck in a tree.",
+      "input": "",
+      "output": "Once upon a time there was a mischievous cat named Tom. Tom loved to roam around town and explore. One day, he was exploring a tall tree when he suddenly realized he was stuck. He tried everything he could think of, but he couldn't get down. Fortunately, a kind passerby heard his cries for help and rescued him from his predicament. Tom was so relieved to be free and thanked his rescuer before continuing his adventures."
+    },
+    {
+      "instruction": "Describe a human-machine interface in 5 words.",
+      "input": "",
+      "output": "A user-machine interaction system."
+    },
+    {
+      "instruction": "Create a rule to detect misspelled words",
+      "input": "",
+      "output": "A rule to detect misspelled words could include checking for words that do not appear in a dictionary or that do not match any known rules for spelling. Additionally, words which are not found in a thesaurus could indicate that they are misspelled."
+    },
+    {
+      "instruction": "Compute the floor function of 2.2",
+      "input": "",
+      "output": "The floor function of 2.2 is 2."
+    },
+    {
+      "instruction": "Describe techniques to optimize web content",
+      "input": "",
+      "output": "Techniques to optimize web content include ensuring that the content is well-structured, breaking it up into shorter paragraphs and subsections, using subheadings, writing in an active voice, optimizing images, and compressing code."
+    },
+    {
+      "instruction": "Calculate the area of a trapezoid with sides of 5 and 6 and height of 8",
+      "input": "",
+      "output": "The area of the trapezoid is 40."
+    },
+    {
+      "instruction": "Find the date in three weeks",
+      "input": "",
+      "output": "The date three weeks from now is August 28th, 2021."
+    },
+    {
+      "instruction": "Evaluate the following polynomial 3x2 + 6x - 5",
+      "input": "",
+      "output": "The polynomial 3x2 + 6x - 5 can be evaluated by substituting the value of x. For example, if x = 4, the value of the polynomial is 49."
+    },
+    {
+      "instruction": "Manually merge the two datasets",
+      "input": "Dataset 1:\nName\t  Age\t  Gender\nJohn\t   24\t   Male\n\nDataset 2:\nName\t  City\t    Country\nJohn\t   Miami\t  USA",
+      "output": "Name\tAge\tGender\tCity\tCountry\nJohn\t24\tMale\tMiami\tUSA"
+    },
+    {
+      "instruction": "Create a list of questions to answer",
+      "input": "",
+      "output": "Questions to answer could include: What are the current trends in the industry? How do I stay ahead of the competition? What actions can I take to increase my profits? How can I use data to make informed decisions?"
+    },
+    {
+      "instruction": "Identify five features of the BMW X5",
+      "input": "",
+      "output": "Five features of the BMW X5 include a twin-turbocharged 3.0-liter inline-six engine, all-wheel drive, adaptive suspension, state-of-the-art infotainment system, and a five-passenger capacity."
+    },
+    {
+      "instruction": "Construct a shell script",
+      "input": "",
+      "output": "#!/bin/bash \n# This is a sample shell script \necho \"Hello World!\" \nread -p \"Enter your name: \" name \necho \"Welcome to Shell scripting, $name!\""
+    },
+    {
+      "instruction": "Name two endangered animals",
+      "input": "",
+      "output": "Two endangered animals are the Siberian tiger and the Mountain Gorilla."
+    },
+    {
+      "instruction": "Analyze the figurative language used in this sentence.",
+      "input": "It was raining cats and dogs.",
+      "output": "The phrase \"raining cats and dogs\" is a metaphor used to express that it is raining heavily. This phrase is commonly used to describe a heavy downpour that would be loud and chaotic like a flurry of cats and dogs running around."
+    },
+    {
+      "instruction": "Categorize the sentence into one of the three logical fallacies.",
+      "input": "The evidence supports that the theory is wrong.",
+      "output": "This sentence presents an example of the logical fallacy known as a circular argument. It states that the evidence supports the idea that the theory is wrong, implying that the evidence itself is wrong and confirms the theory's incorrectness."
+    },
+    {
+      "instruction": "Make this sentence sound more poetic by rephrasing it.",
+      "input": "The wind was blowing hard.",
+      "output": "A strong wind blew with force."
+    },
+    {
+      "instruction": "Replace the words with synonyms to make this sentence more sophisticated.",
+      "input": "He ran quickly across the street.",
+      "output": "He sprinted hastily across the thoroughfare."
+    },
+    {
+      "instruction": "Paraphrase this sentence by reusing some of the words.",
+      "input": "We must stand up and fight.",
+      "output": "We must rise and resist."
+    },
+    {
+      "instruction": "Find the difference in spending between Jan and Feb",
+      "input": "Jan: $100\nFeb: $150",
+      "output": "$50"
+    },
+    {
+      "instruction": "Who said the following quote?",
+      "input": "\"Education is the most powerful weapon which you can use to change the world.\"",
+      "output": "Nelson Mandela"
+    },
+    {
+      "instruction": "Name a famous celebrity who is in the movie industry",
+      "input": "",
+      "output": "Tom Cruise"
+    },
+    {
+      "instruction": "Create a set of rules for the game of hangman.",
+      "input": "",
+      "output": "Rules of Hangman: \n\n1. Choose a word with any length. \n2. The opposing player must try to guess the word one letter at a time. \n3. For each incorrect guess, draw a portion of the hangman. \n4. The game is over when the hangman is completed or the word is guessed. \n5. The player guessing the word is the winner."
+    },
+    {
+      "instruction": "Describe in general terms what happens in the first days after someone gets infected with Covid-19.",
+      "input": "",
+      "output": "In the first days after someone gets infected with Covid-19, they may experience mild to severe respiratory symptoms such as coughing, fever, and shortness of breath. In some cases, they may also experience other symptoms such as a sore throat, body aches, fatigue, and nausea. The severity and duration of symptoms varies from person to person and may take up to 14 days to develop. It is important to seek medical treatment right away to monitor symptoms and get the best care possible."
+    },
+    {
+      "instruction": "Provide a list of best practices for successful online collaboration.",
+      "input": "",
+      "output": "Best practices for successful online collaboration: \n1. Set clear goals and deadlines. \n2. Create collaboration protocols and rules of engagement.\n3. Utilize video conferencing, multimedia, and creativity engines to create a highly engaging virtual experience.\n4. Develop trust and transparency between members.\n5. Leverage the strengths of team members to create collective success. \n6. Utilize real-time communication tools and project planning tools to make sure everyone is on the same page. \n7. Establish check-ins to discuss progress, milestones and tasks.\n8. Celebrate successes, recognize achievements and thank everyone involved."
+    },
+    {
+      "instruction": "Suggest a marketing strategy for a luxury car brand.",
+      "input": "",
+      "output": "A successful marketing strategy for a luxury car brand should focus on focusing on establishing an emotional connection with the target audience. This should involve creating high-end visuals and content that evoke the desired brand values, such as craftsmanship, sophistication and exclusivity. Advertising through digital platforms, influencers and traditional media should be used to create brand awareness. The use of experiential marketing can create memorable experiences that generate interest in the brand. Additionally, providing unique customer services and amenities will create a differentiated and exclusive experience for the customers."
+    },
+    {
+      "instruction": "Given the Tasks for example valuating an employee’s performance, propose how Artificial Intelligence could benefit the process.",
+      "input": "",
+      "output": "AI can be used to automate the process of evaluating employee's performance by gathering and analyzing data from multiple sources. This data can include performance reviews, reports, social media interactions, and customer feedback. AI can analyze the data and generate insights about employee performance. It can also be used to generate reports in real-time to allow employers to better monitor and evaluate the performance of their employees. Additionally, AI can be used to assess the employee's performance in various tasks and provide actionable feedback to help them improve their performance."
+    },
+    {
+      "instruction": "Suggest a way to keep employees motivated and engaged in the workplace.",
+      "input": "",
+      "output": "One way to keep employees motivated and engaged in the workplace is to provide recognition and rewards for employees who meet their objectives and go the extra mile in their work. Regular performance reviews, feedback, and goal setting will help to create an environment where employees feel their efforts and contributions are valued. Providing meaningful rewards, such as bonuses or additional benefits, will also let employees know they are appreciated and make them more likely to stay engaged and motivated. Additionally, providing opportunities for growth and development, encouraging collaboration and teamwork, and creating a flexible work environment will help to keep employees engaged and motivated in the workplace."
+    },
+    {
+      "instruction": "Come up with an algorithm for predicting house prices in a given city.",
+      "input": "",
+      "output": "The algorithm should include multiple factors such as location, size and number of rooms, local amenities, as well as supply and demand in the area. Additionally, it should also take into account historical housing trends, economic conditions, and any external events that may affect real estate values. The data should be analyzed by the algorithm to generate an accurate prediction of house prices in a given city."
+    },
+    {
+      "instruction": "Design a survey to collect customer feedback on the quality of a product.",
+      "input": "",
+      "output": "The survey should include questions about the customer's overall experience with the product, the features that they liked and disliked, any problems they had, and suggestions for improvement. Furthermore, it should also ask the customer to rate the product on various metrics such as design, functionality, and quality. Additionally, the survey should also ask open-ended questions that allow customers to provide extra feedback and advice on how the product could be improved."
+    },
+    {
+      "instruction": "Give advice on creating a memorable and successful email marketing campaign.",
+      "input": "",
+      "output": "Creating a successful email marketing campaign requires careful planning and execution. It should start with crafting a compelling subject line and message that will resonate with the recipients. The content should be personalized and relevant to the user. Additionally, the style, tone, and visuals should be attractive and engaging. Timing is also important - emails should be sent when most likely to be opened and read. Testing of campaigns and tracking analytics can help to identify which emails have been successful and provide insights for improving future campaigns."
+    },
+    {
+      "instruction": "Pick apart the syntax of the sentence \"John loves to swim\".",
+      "input": "",
+      "output": "The sentence \"John loves to swim\" is composed of a subject, verb, and direct object. The subject is \"John\", the verb is \"loves\", and the direct object is \"to swim\". It is a declarative sentence in the present tense, expressing an activity that John does regularly."
+    },
+    {
+      "instruction": "Describe the process of exploration and development of a new drug.",
+      "input": "",
+      "output": "The process of exploration and development of a new drug involves a series of steps. This includes researching and understanding the disease mechanism, identifying possible drug targets, and designing and testing a molecule that will interact effectively with them. The molecule is then refined to increase its efficacy, safety and cost effectiveness. Clinical trials are conducted to test the safety and effectiveness of the drug, followed by approval from regulatory authorities. The drug is then manufactured, marketed and prescribed before it is available for use."
+    },
+    {
+      "instruction": "Create a list of product features for an e-commerce website.",
+      "input": "",
+      "output": "A list of product features for an e-commerce website should include: \n- User-friendly navigation and search options\n- Shopping cart and checkout functionality\n- Order status and tracking\n- Personalized product recommendations\n- Comprehensive product details and images\n- Social media integration\n- Mobile commerce optimization\n- Additional security measures such as fraud prevention\n- Secure payment methods\n- Automated customer service\n- Loyalty programs\n- Product comparison and ratings"
+    },
+    {
+      "instruction": "Suggest a way to create a memorable brand identity.",
+      "input": "",
+      "output": "Creating a memorable brand identity involves creating a unique visual language and messaging that conveys the brand's distinct values, distinguishes it from its competitors, and resonates with the target audience. This can be accomplished through a recognizable logo, signature colors, original typography, and meaningful symbols. Additionally, creating engaging content, advertising campaigns, and customer experiences can help to further cultivate the brand identity and solidify its place in the market."
+    },
+    {
+      "instruction": "Name three famous modern plays.",
+      "input": "",
+      "output": "1. The Curious Incident of the Dog in the Night-Time by Mark Haddon\n2. Angels in America by Tony Kushner\n3. Death of a Salesman by Arthur Miller"
+    },
+    {
+      "instruction": "Generate a list of landscape gardening projects for a garden that is 30m by 20m.",
+      "input": "Garden size: 30m by 20m",
+      "output": "1. Install a pergola for shade and comfort.\n2. Set up garden lighting for nighttime blooms and show. \n3. Set up raised flower gardens with different varieties of plants.\n4. Install a water feature such as a fountain or pond.\n5. Plant trees to provide shade and natural beauty.\n6. Plant climbing vines on fences and walls.\n7. Set up a vegetable garden.\n8. Construct a path of stones and gravel.\n9. Add a seating area with outdoor furniture.\n10. Utilize vertical lattices or garden arches to create a layered look and texture."
+    },
+    {
+      "instruction": "What is the importance of ultraviolet radiation in our environment?",
+      "input": "",
+      "output": "Ultraviolet radiation has many important roles in our environment. It helps to break down pollutants in the atmosphere, preventing them from reaching the Earth’s surface. It also aids in the production of Vitamin D in humans, and helps to protect plants from ultraviolet damage. Finally, it is believed that the ozone layer helps to block out harmful UV radiation, protecting the Earth’s surface and its inhabitants."
+    },
+    {
+      "instruction": "Provide a step-by-step recipe for a simple beef curry.",
+      "input": "",
+      "output": "1. Heat 1 tbsp of oil in a pan. \n2. Add 1 onion, 2 cloves of garlic, 1 piece of fresh ginger, and 2 cloves and sauté until golden brown.\n3. Add the beef cubes and fry until the beef is browned.\n4. Add 1 tsp of coriander powder, 1 tsp of turmeric powder, 1 tsp of cumin powder and 1 tsp of chili powder and mix.\n5. Add 1 cup of tomatoes and stir. \n6. Add 1 cup of water and simmer for 15-20 minutes, stirring occasionally.\n7. Taste and adjust the seasoning as needed.\n8. Garnish with chopped cilantro leaves and serve hot."
+    },
+    {
+      "instruction": "Describe the history of humans in space.",
+      "input": "",
+      "output": "Humans have been fascinated with space exploration for centuries and have dreamed of visiting other worlds since ancient times. The first milestone in human history of space exploration was the launch of the first artificial satellite, Sputnik 1 in 1957. Since then, humans have achieved many milestones including having humans sent to the Moon, launching numerous satellites and spacecrafts, and having a permanent presence in space with the International Space Station. The future of space exploration is bright with plans to explore the universe, visit other planets and potentially colonize other worlds."
+    },
+    {
+      "instruction": "Write a few lines of code to create a basic calculator in Python.",
+      "input": "",
+      "output": "def add(x, y): \n   return x + y \n\ndef subtract(x, y): \n   return x - y \n\ndef multiply(x, y): \n   return x * y \n\ndef divide(x, y): \n   return x / y \n\nnum1 = float(input(\"Enter first number: \")) \nnum2 = float(input(\"Enter second number: \")) \n\nprint(\"Select operation.\") \nprint(\"1.Add\") \nprint(\"2.Subtract\") \nprint(\"3.Multiply\") \nprint(\"4.Divide\") \n\nchoice = input(\"Enter choice(1/2/3/4):\") \n\nif choice == '1': \n   print(num1,\"+\",num2,\"=\", add(num1,num2)) \n  \nelif choice == '2': \n   print(num1,\"-\",num2,\"=\", subtract(num1,num2)) \n   \nelif choice == '3': \n   print(num1,\"*\",num2,\"=\", multiply(num1,num2)) \n\nelif choice == '4': \n   print(num1,\"/\",num2,\"=\", divide(num1,num2)) \nelse: \n   print(\"Invalid input\")"
+    },
+    {
+      "instruction": "Write a one-paragraph description of the anti-war novel All Quiet on the Western Front.",
+      "input": "",
+      "output": "All Quiet on the Western Front is a classic anti-war novel by Erich Maria Remarque that tells the story of a group of young German soldiers during World War I. The novel reflects on the brutality and devastation of the war, as the soldiers grapple with the horrors of war, disillusionment and the ultimate futility of their situation. Through its emotionally raw and vivid realism, All Quiet on the Western Front remains an iconic novel that continues to affect readers nearly a century after its publication."
+    },
+    {
+      "instruction": "Generate two exercise plans for a beginner who wants to lose weight.",
+      "input": "",
+      "output": "Exercise Plan 1: \n1. Start with a 30-minute brisk walk, 5 days per week.\n2. Add running for 20 minutes, 3 days per week.\n3. Add an abdominal workout to the mix, focusing on crunches and planks.\n4. Do strength moves such as squats, lunges, pull-ups and push-ups.\n5. Incorporate HIIT exercises into your routine, such as burpees and jumping jacks on alternate days.\n\nExercise Plan 2:\n1. Begin with low-impact exercises such as yoga, swimming, or cycling. \n2. Incorporate strength training such as push-ups, squats, and lunges .\n3. Perform HIIT 1-2 days per week with exercises like jumping jacks, burpees and mountain climbers.\n4. Add an abdominal workout, focusing on crunches and planks.\n5. Swimming is a great form of cardio. An ideal swimming session would include intervals of sprinting and resting."
+    },
+    {
+      "instruction": "Compare the plots of Harry Potter and the Sorcerer's Stone and Harry Potter and the Chamber of Secrets.",
+      "input": "",
+      "output": "In Harry Potter and the Sorcerer's Stone, the main plot revolves around Harry's quest to prevent Voldemort from reclaiming the Sorcerer's Stone. He needs to prove his magical abilities and complete various tasks in order to succeed. In Harry Potter and the Chamber of Secrets, the main plot centers around Harry and his friends attempting to uncover the mystery surrounding the magical chamber and its deadly creature. The story also focuses on Harry's struggle to prove his innocence against the dark magic he is blamed for releasing. Both books focus on Harry's danger-filled adventures to save the wizarding world from evil."
+    },
+    {
+      "instruction": "Provide five tips for eating healthy.",
+      "input": "",
+      "output": "1. Eat plenty of fruits and vegetables. \n2. Avoid eating processed foods. \n3. Limit your intake of sugar and salt.\n4. Consume lean proteins such as fish, poultry, and legumes. \n5. Drink plenty of water throughout the day."
+    },
+    {
+      "instruction": "Summarize the concept of \"survival of the fittest\".",
+      "input": "",
+      "output": "Survival of the fittest is the idea that only the strongest, most adaptable individuals will survive and reproduce over weaker individuals, passing on their beneficial traits to their offspring."
+    },
+    {
+      "instruction": "Convert 10 years into days.",
+      "input": "",
+      "output": "10 years is equal to 3652 days."
+    },
+    {
+      "instruction": "Is the following statement true or false: The speed of light is constant?",
+      "input": "",
+      "output": "True. The speed of light is constant and will always remain the same."
+    },
+    {
+      "instruction": "Give an example of a seed-bearing plant.",
+      "input": "",
+      "output": "An example of a seed-bearing plant is a sunflower. Sunflowers are an annual plant that produce edible seeds which are rich in fats and proteins."
+    },
+    {
+      "instruction": "Classify the following sentence: \"Lettuce is a vegetable.\"",
+      "input": "",
+      "output": "True. Lettuce is a type of vegetable."
+    },
+    {
+      "instruction": "Edit the following sentence for better grammar: \"What is colour the sky.\"",
+      "input": "",
+      "output": "What color is the sky?"
+    },
+    {
+      "instruction": "Is the following statement true or false: Stonehenge was built in 1700 BC?",
+      "input": "",
+      "output": "False. Stonehenge was built between 3000 to 2000 BC."
+    },
+    {
+      "instruction": "Convert 50 mph to m/s.",
+      "input": "",
+      "output": "50 miles per hour is equal to 22.35 meters per second."
+    },
+    {
+      "instruction": "Write a 5-sentence story about a young girl who meets a dragon.",
+      "input": "",
+      "output": "Once upon a time, there was a young girl who lived in a small village at the edge of a great mountain range. One day, she decided to venture into the mountains in search of adventure. After a long day of wandering, she came across an ancient cave. In the darkness, she saw two glowing eyes, and a voice said, \"I am the dragon of this mountain.\" She was terrified, yet intrigued, and the dragon said, \"If you can answer one question for me, I will grant you one wish.\" The girl mustered all her courage and answered the dragon's question. To her amazement, the dragon granted her wish, and gave her a magical gift before she left. From then on, she always remembered the magical moment she met the dragon in the mountains."
+    },
+    {
+      "instruction": "Given an input of a student's GPA, classify whether the student has high, average, or low GPA.",
+      "input": "GPA: 2.7",
+      "output": "Low GPA."
+    },
+    {
+      "instruction": "What is the past participle of the word “sing”?",
+      "input": "",
+      "output": "The past participle of the word \"sing\" is \"sung\"."
+    },
+    {
+      "instruction": "Combine the following sentences into one with an appropriate conjunction.",
+      "input": "I'm tired. I want to go to bed.",
+      "output": "I'm tired, so I want to go to bed."
+    },
+    {
+      "instruction": "Explain the meaning of the phrase “to wear one's heart on one's sleeve”.",
+      "input": "",
+      "output": "The phrase \"to wear one's heart on one's sleeve\" means to openly show one's emotions and feelings."
+    },
+    {
+      "instruction": "Which is the most popular programming language as of 2021?",
+      "input": "",
+      "output": "According to the TIOBE Index, the most popular programming language as of 2021 is Java. Python and C also have high rankings, followed by C++, C#, JavaScript, Visual Basic .NET, and PHP."
+    },
+    {
+      "instruction": "Describe the characteristic of a novel.",
+      "input": "",
+      "output": "A novel is a long work of narrative fiction typically written in prose form. Novels usually have a plot structure that follows a progression of events and an overarching theme. They usually also have multiple characters and settings and a conflict or climax."
+    },
+    {
+      "instruction": "Generate an imperative sentence on how to get started with programming.",
+      "input": "",
+      "output": "Start by learning the basics of a programming language and writing simple programs."
+    },
+    {
+      "instruction": "Synthesize a sentence that summarizes the text.",
+      "input": "The novel 1984 by George Orwell is a dystopian novel written in 1948, depicting a totalitarian society. It tells the story of Winston Smith and his rebellion against the oppressive social structure.",
+      "output": "George Orwell's 1948 novel 1984 is a dystopian tale of Winston Smith's revolt against a totalitarian society."
+    },
+    {
+      "instruction": "Give a creative name for a pet shop",
+      "input": "",
+      "output": "FurEver Friends Pet Palace"
+    },
+    {
+      "instruction": "Describe a scary situation",
+      "input": "",
+      "output": "She heard the creak of the door and her heart raced. She felt a chill up her spine and the prickling of her skin as she realized something sinister was lurking in the shadows of the night."
+    },
+    {
+      "instruction": "Write a creative job title for a social media manager",
+      "input": "",
+      "output": "Chief Connector of Communities"
+    },
+    {
+      "instruction": "Suggest a vegetable dish",
+      "input": "",
+      "output": "Roasted Brussel Sprouts with Balsamic Glaze."
+    },
+    {
+      "instruction": "Outline the main pros and cons for a given situation",
+      "input": "Living in a city",
+      "output": "Pros: \n- Opportunities for work, education and entertainment\n- Nearby public transportation for easy travel\n- Often contains a variety of culture, restaurants and attractions\n\nCons: \n- High population density and noise pollution \n- Expensive living costs\n- Limited access to nature and parks"
+    },
+    {
+      "instruction": "What is the most significant economic achievement of empire of China",
+      "input": "",
+      "output": "One of the most significant economic achievements of the Chinese Empire was the establishment of the Grand Canal, which was a major source of trade and commerce dating back to the 5th century BCE. The canal connected the Yellow and Yangtze River valleys, allowed for the safe and efficient transportation of goods, and improved the economic system and overall quality of life for the people of China."
+    },
+    {
+      "instruction": "List five fruits that are not citrus fruits.",
+      "input": "",
+      "output": "- Banana\n- Apple\n- Strawberry\n- Avocado\n- Mango"
+    },
+    {
+      "instruction": "Describe the nutritional benefits of adding carrots to a diet.",
+      "input": "",
+      "output": "Carrots are a great addition to any diet due to their high Vitamin A content, which is essential for healthy eyesight and overall health. They are also a good source of dietary fiber, which helps to regulate the digestive system and maintain regular bowel movements, as well as potassium and beta-carotene, two important minerals that help to fight disease and can aid in general wellness and longevity."
+    },
+    {
+      "instruction": "Come up with a unique recipe that incorporates spinach.",
+      "input": "",
+      "output": "Veggie Lasagna with Spinach Filling: Preheat oven to 375°F. Heat a large skillet over medium-high heat with a few teaspoons of oil. Add 1/2 an onion, diced, and 1/2 a bell pepper, diced, and sauté until softened, about 5 minutes. Add 3 cloves of minced garlic and stir. Add a 10-ounce package of frozen, thawed, and squeezed of excess moisture spinach and cook for 2 minutes. Remove from heat and set aside. In a bowl, mix together 2 cups of ricotta cheese, 1/4 cup of finely grated Parmesan, 1/2 teaspoon of each oregano, basil, garlic powder, and salt, and pepper to taste. Spread 1/2 a cup of store-bought or homemade marinara sauce in the bottom of an 8×8-inch baking dish. Place 4-5 lasagna noodles on top of the sauce. Evenly spread the ricotta cheese mixture over the noodles. Top with the spinach and vegetable mixture, followed by a layer of noodles. Layer with 1/2 cup of marinara sauce, 1/2 cup of shredded mozzarella cheese, more lasagna noodles, the remaining ricotta cheese mixture and vegetables, and 1/2 cup of marinara sauce. Sprinkle with the remaining mozzarella cheese and 1/4 cup of Parmesan cheese. Cover with foil and bake for 25 minutes. Remove foil and bake for an additional 10 minutes or until cheese is melted and bubbly. Let cool for 10 minutes before serving."
+    },
+    {
+      "instruction": "Create a comparison chart to compare apples and oranges.",
+      "input": "",
+      "output": "| Apples | Oranges  | \n|--------|----------| \n| Texture: Crunchy | Texture: Juicy | \n| Color: Red or Yellow | Color: Orange | \n| Taste: Sweet | Taste: tart/sour | \n| High in vitamins A, C and B-complex | High in vitamins A and C | \n| High in fiber | High in folate |"
+    },
+    {
+      "instruction": "Make a list of three activities you can do in the rain.",
+      "input": "",
+      "output": "- Go for a jog/run in the rain\n- Set up a tent and have an outdoor picnic\n- Read a book while listening to the sound of rain"
+    },
+    {
+      "instruction": "Make a list of five life skills every person should have.",
+      "input": "",
+      "output": "- Time management\n- Communication\n- Problem-solving\n- Conflict resolution\n- Self-care"
+    },
+    {
+      "instruction": "Generate a report summarizing a conversation about car maintenance.",
+      "input": "Joe and Lisa were discussing the importance of regular car maintenance such as oil changes, tire rotations, and brake inspects.\nJoe believes that regular car maintenance is essential for keeping the car operating properly and avoiding major repairs. Lisa believes that some car maintenance procedures are unnecessary and are a waste of money.",
+      "output": "Joe and Lisa discussed the importance of regular car maintenance such as oil changes, tire rotations, and brake inspections. Joe believes that regular car maintenance is essential for keeping the car operating properly and avoiding major repairs while Lisa believes that some procedures are unnecessary and are a waste of money. It is agreed that regular oil changes and tire rotations are important to maintain the health of the car but that some other maintenance procedures can be skipped depending on the age and condition of the car."
+    },
+    {
+      "instruction": "Give examples of different types of leadership.",
+      "input": "",
+      "output": "Examples of different types of leadership include autocratic, democratic, transformational, and laissez-faire. Autocratic leadership involves making decisions without consultation, while transformational leadership is based on inspirational motivation and connecting with followers. Democratic leadership is focused on decision-making by consensus, and laissez-faire leadership is based on a hands-off approach, allowing everyone to make their own decisions without guidance."
+    },
+    {
+      "instruction": "Create a list of five books that everyone should read.",
+      "input": "",
+      "output": "- To Kill a Mockingbird by Harper Lee\n- The Great Gatsby by F. Scott Fitzgerald\n- 1984 by George Orwell\n- The Catcher in the Rye by J.D. Salinger\n- Animal Farm by George Orwell"
+    },
+    {
+      "instruction": "Re-write the following sentence using verbs in the past tense.",
+      "input": "I have bought a new car.",
+      "output": "I bought a new car."
+    },
+    {
+      "instruction": "Solve 8 x 8.",
+      "input": "",
+      "output": "64"
+    },
+    {
+      "instruction": "Cite a quote from a famous person about courage.",
+      "input": "",
+      "output": "\"Courage is not the absence of fear, but rather the judgement that something else is more important than fear.\" - Ambrose Redmoon"
+    },
+    {
+      "instruction": "Rearrange the sentence below so it forms a meaningful statement.",
+      "input": "is million potatoes eaten 8000 a annually",
+      "output": "Approximately 8 million potatoes are eaten annually."
+    },
+    {
+      "instruction": "Rewrite the sentence so the intended meaning does not change, but the sentence structure is altered.",
+      "input": "The movie had a tragic ending.",
+      "output": "The ending of the movie was tragic."
+    },
+    {
+      "instruction": "Identify the incorrect written word and correct it",
+      "input": "The fox begged the houns to help him cross the street.",
+      "output": "The fox begged the hounds to help him cross the street."
+    },
+    {
+      "instruction": "Choose the correct tenses used in the sentence",
+      "input": "Yesterday I going to the store",
+      "output": "Yesterday I went to the store."
+    },
+    {
+      "instruction": "Provide an example to illustrate how the given content can be used",
+      "input": "Data Science",
+      "output": "Data Science can be used to analyze customer data to uncover insights related to customer preferences, behaviors, and trends. For example, a retail store can use data science to explore customer buying patterns in order to create targeted marketing strategies."
+    },
+    {
+      "instruction": "Generate a list of 5 positive character traits.",
+      "input": "",
+      "output": "Punctuality, Kindness, Creativity, Honesty, Ambition."
+    },
+    {
+      "instruction": "Name an advantage of learning a second language.",
+      "input": "",
+      "output": "An advantage of learning a second language is that it can increase your job prospects and increase the career opportunities available to you. It can also help to enhance your understanding of your native language and give you a better understanding of different cultures. Additionally, it can help to increase your cognitive function and boost your memory."
+    }
+  ]

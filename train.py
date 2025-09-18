@@ -101,6 +101,20 @@ class TrainingArguments(transformers.Seq2SeqTrainingArguments):
             "value if set."
         },
     )
+    max_eval_samples: Optional[int] = field(
+        default=None,
+        metadata={
+            "help": "For debugging purposes or quicker training, truncate the number of evaluation examples to this "
+            "value if set."
+        },
+    )
+    max_test_samples: Optional[int] = field(
+        default=None,
+        metadata={
+            "help": "For debugging purposes or quicker training, truncate the number of test examples to this "
+            "value if set."
+        },
+    )
     cache_dir: Optional[str] = field(
         default=None
     )
@@ -474,6 +488,7 @@ def local_dataset(args,dataset_name):
     eval_path = dataset_name.replace("train", "eval")
 
     if os.path.exists(eval_path) and (args.do_eval):
+        print(f"Found eval dataset at {eval_path}, loading it...")
         if eval_path.endswith(".json"):
             eval_dataset = Dataset.from_json(eval_path)
         elif eval_path.endswith(".csv"):

@@ -60,12 +60,12 @@ output_path = "data/ours/train/alpaca_50p_gpt4o_rich_content.json"
 convert_to_alpaca(input_path, output_path) """
 
 input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
-output_path = "/home/chenchen/gjx/Judge/data/ours/train/alpaca_bisa_50p_1k_eval.json"
+output_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data_1050.json"
 
 with open(input_path,'r',encoding='utf-8') as fin:
     data = json.load(fin)
 
-subset = data[30000:30100]
+subset = data[:1050]
 
 with open(output_path,'w',encoding='utf-8') as fout:
     json.dump(subset, fout, indent=2, ensure_ascii=False)
