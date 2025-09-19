@@ -59,7 +59,7 @@ match_extract(input_file1, input_file2, output_file) """
 output_path = "data/ours/train/alpaca_50p_gpt4o_rich_content.json"
 convert_to_alpaca(input_path, output_path) """
 
-input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
+""" input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
 output_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data_1050.json"
 
 with open(input_path,'r',encoding='utf-8') as fin:
@@ -70,4 +70,28 @@ subset = data[:1050]
 with open(output_path,'w',encoding='utf-8') as fout:
     json.dump(subset, fout, indent=2, ensure_ascii=False)
 
-print(f"Converted data saved to {output_path}")
+print(f"Converted data saved to {output_path}") """
+
+input_file = "/home/chenchen/gjx/Judge/data/ours/eval/alpaca_raw_1k_eval.json"
+# 输出文件（目标 JSONL）
+output_file = "data.jsonl"
+
+with open(input_file, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+with open(output_file, "w", encoding="utf-8") as f:
+    for item in data:
+        # 拼接 instruction 和 input
+        question = item["instruction"].strip()
+        if item["input"].strip():
+            question += "\n" + item["input"].strip()
+        
+        answer = item["output"].strip()
+        
+        new_item = {
+            "question": question,
+            "answer": answer
+        }
+        f.write(json.dumps(new_item, ensure_ascii=False) + "\n")
+
+print(f"转换完成 ✅ 输出到 {output_file}")
