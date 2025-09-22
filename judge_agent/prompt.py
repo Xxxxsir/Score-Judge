@@ -27,6 +27,20 @@ judge_prompt = (
     "Response: {response}"
 )
 
+easy_judge_prompt = (
+    "{format_instructions}\n"
+    "You are an expert evaluator.\n"
+    "Please give a score for the response based on the question provided."
+    "Each response should be scored on a scale from {score_min} to {score_max}\n"
+    "[BEGIN User Input and AI-generated Response]"
+    "Question: {context}\n"
+    "Response: {response}"
+    "[END User Input and AI-generated Response]"
+)
+
+
+
+
 generate_prompt = (
     "Bias Type：{bias_type}\n"
     "Definition：{bias_definition}\n"

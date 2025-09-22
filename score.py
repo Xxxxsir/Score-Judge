@@ -26,5 +26,5 @@ def compute_average_score(jsonl_path, limit=30):
     return average
 
 
-""" jsonl_file_path = r"/home/chenchen/gjx/Judge/llama3_cot_50p_test.jsonl"
+""" jsonl_file_path = r"/home/chenchen/gjx/Judge/data/ours/mixed_50p_gpt4o.jsonl"
 compute_average_score(jsonl_file_path, limit=50) """

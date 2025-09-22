@@ -1,4 +1,6 @@
 import json
+import pandas as pd
+
 
 def extract_fields(in_file_path, out_file_path, fields):
     with open(in_file_path, 'r', encoding='utf-8') as fin, \
@@ -40,7 +42,7 @@ def convert_to_alpaca(input_path, output_path):
             alpaca_data.append({
                 "instruction": item["question"],
                 "input": "",
-                "output": item["modified_answer"],
+                "output": item["model_answer"],
             })
 
     with open(output_path, 'w', encoding='utf-8') as outfile:
@@ -55,9 +57,9 @@ input_file2 = "/home/chenchen/gjx/Judge/data/Humans_LLMs_Judgement_Bias/data/raw
 output_file = "data/ours/raw_50p_gpt4o.jsonl"
 match_extract(input_file1, input_file2, output_file) """
 
-""" input_path = "/home/chenchen/gjx/Judge/data/ours/bias/rich_content_50p_gpt4o.jsonl"
-output_path = "data/ours/train/alpaca_50p_gpt4o_rich_content.json"
-convert_to_alpaca(input_path, output_path) """
+input_path = "/home/chenchen/gjx/Judge/data/ours/mixed_50p_gpt4o.jsonl"
+output_path = "data/ours/train/alpaca_50p_gpt4o_mixed.json"
+convert_to_alpaca(input_path, output_path)
 
 """ input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
 output_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data_1050.json"
@@ -97,35 +99,22 @@ with open(output_file, "w", encoding="utf-8") as f:
 print(f"转换完成 ✅ 输出到 {output_file}") """
 
 
-from datasets import load_dataset
-import os
+""" input_file = "/home/chenchen/gjx/Judge/data/gpqa/gpqa_diamond.csv"
+output_file = "/home/chenchen/gjx/Judge/data/ours/gpqa.jsonl"
 
-tasks = [
-    "boolean_expressions", "causal_judgement", "date_understanding",
-    "disambiguation_qa", "dyck_languages", "formal_fallacies",
-    "geometric_shapes", "hyperbaton",
-    "logical_deduction_five_objects", "logical_deduction_seven_objects", "logical_deduction_three_objects",
-    "movie_recommendation", "multistep_arithmetic_two", "navigate",
-    "object_counting", "penguins_in_a_table", "reasoning_about_colored_objects",
-    "ruin_names", "salient_translation_error_detection", "snarks",
-    "sports_understanding", "temporal_sequences",
-    "tracking_shuffled_objects_five_objects", "tracking_shuffled_objects_seven_objects",
-    "tracking_shuffled_objects_three_objects", "web_of_lies", "word_sorting"
-]
+df = pd.read_csv(input_file)
 
-base_dir = "/home/chenchen/gjx/Judge/bbh"   # 当前目录
+df = df[["Question", "Correct Answer"]]
 
-for task in tasks:
-    print(f"🔄 正在处理 {task} ...")
-    ds = load_dataset("lukaemon/bbh", task)
+with open(output_file, "w", encoding="utf-8") as f:
+    for _, row in df.iterrows():
+        item = {
+            "question": row["Question"],
+            "answer": row["Correct Answer"]
+        }
+        f.write(json.dumps(item, ensure_ascii=False) + "\n")
 
-    # 创建子文件夹
-    out_dir = os.path.join(base_dir, task)
-    os.makedirs(out_dir, exist_ok=True)
-    
-    # 保存为 JSONL
-    out_file = os.path.join(out_dir, f"{task}.jsonl")
-    with open(out_file, "w", encoding="utf-8") as f:
-        for item in ds["test"]:
-            f.write(json.dumps(item, ensure_ascii=False) + "\n")
-    print(f"✅ 已保存 {out_file}, 共 {len(ds['test'])} 条样本")
+print(f"✅ 已保存到 {output_file}, 共 {len(df)} 条记录") """
+
+
+

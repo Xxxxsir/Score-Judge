@@ -1,7 +1,7 @@
 import json
 from time import sleep
 from typing import Dict, List
-from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts
+from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts,easy_judge_prompt
 from tqdm import tqdm
 from judge_agent.response_eval import (
     score_config,
@@ -38,7 +38,8 @@ if __name__ == "__main__":
 
     #input_file_path = "data/ours/test/llama3ins_raw_92p_test.jsonl"
     input_list = [
-                  "/home/chenchen/gjx/Judge/data.jsonl",]
+                  "/home/chenchen/gjx/Judge/llama3ins_mmlu_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_gpqa_test.jsonl"]
     
     for input_file_path in input_list:
         run_llm_judge(
