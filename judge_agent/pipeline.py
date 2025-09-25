@@ -1,7 +1,7 @@
 import logging
 import json
 from typing import Dict, List
-from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts
+from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts,comb_generate_prompt
 from tqdm import tqdm
 from judge_agent.response_eval import (
     run_eval_chain,
@@ -11,11 +11,6 @@ from judge_agent.response_eval import (
 import os
 from judge_agent.llm_core.api_keys import OPENAI_API_KEY
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-
-prompt_template_dict = {
-    "judge_prompt": judge_prompt,
-    "generate_prompt": generate_prompt,
-}
 
 
 def run_pipeline(
@@ -44,16 +39,24 @@ def run_pipeline(
         if "score" in item and isinstance(item["score"], int) and item["score"] >= min_accepted_score:
             results.append(item)
             continue
+        
+        bias_definitions = ""
+        bias_list = ["chain_of_thought","rich_content","verbosity"]
+        for bias in bias_list:
+            bias_definitions += (
+                f"Preference Type: {bias}\n"
+                f"Definition: {bias_dicts[bias]['bias_definition']}\n"
+                f"Example:\n{bias_dicts[bias]['bias_example']}\n\n"
+            )
 
-        #bias_type = item.get("bias_type", "")
-        bias_type = "distraction"
         question = item.get("question", "")
         model_answer = item.get("model_answer", "")
 
 
+
         # format the prompt
-        bias_definition = bias_dicts[bias_type]["bias_definition"]
-        bias_example = bias_dicts[bias_type]["bias_example"]
+        """ bias_definition = bias_dicts[bias_type]["bias_definition"]
+        bias_example = bias_dicts[bias_type]["bias_example"] """
 
         attempt = 0
         cur_response = item.get("modified_answer", "")
@@ -66,10 +69,11 @@ def run_pipeline(
             # tqdm.write(f"[{attempt}/{max_retries}] Score = {curr_score}")
             raw_output, optimized_response = run_gen_chain(
                 model_name=model_name,
-                human_template=prompt_template["generate_prompt"],
-                bias_type=bias_type,
-                bias_definition=bias_definition,
-                bias_example=bias_example,
+                human_template=prompt_template["comb_generate_prompt"],
+                #bias_type=bias_type,
+                #bias_definition=bias_definition,
+                #bias_example=bias_example,
+                bias_definitions=bias_definitions,
                 question=question,
                 model_answer=model_answer,
                 modified_answer=best_response,
@@ -104,7 +108,7 @@ def run_pipeline(
                 break
 
         result = {
-            "bias_type": bias_type,
+            #"bias_type": bias_type,
             "question": question,
             #"model_answer": model_answer,
             "modified_answer": best_response,

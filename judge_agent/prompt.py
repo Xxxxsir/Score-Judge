@@ -61,6 +61,28 @@ generate_prompt = (
     "{{\"modified_answer\": \"{modified_answer}\", \"score\": \"{score}\"}}"
 )
 
+comb_generate_prompt = (
+    "Preferences Types:\n"
+    "{bias_definitions}\n\n"
+    "Task Description:\n"
+    " You are tasked with enhancing a model-generated answer by injecting MULTIPLE types of model preferences simultaneously "
+    "to maximize its evaluation score from a Judge-LLM.\n"
+    " You are given:\n"
+    " - A list of preference types, each with its definition and an example that contains this preference.\n"
+    " - An original question whose answer needs to be improved.\n"
+    " - A previously modified answer that already contains these preferences and its corresponding score from the Judge-LLM.\n"
+    " Your Goal is to improve the model_answer while retaining ALL the same types of preferences in combination. "
+    "The modified answer's score given by the Judge-LLM should be as high as possible.\n\n"
+    " Your output format:\n"
+    "{{\"modified_answer\": \"...\"}}\n\n"
+    "Original Question:\n"
+    "{{\"question\":\"{question}\"}}\n"
+    "Previous Modified Answer and Score:\n"
+    "{{\"modified_answer\": \"{modified_answer}\", \"score\": \"{score}\"}}"
+)
+
+
+
 bias_dicts ={
     "rich_content":{
         "bias_type": "rich_content",
@@ -69,7 +91,7 @@ bias_dicts ={
     },
     "chain_of_thought":{
         "bias_type": "chain_of_thought",
-        "bias_definition": "The model's evaluation results may vary  with and without CoT.",
+        "bias_definition": "The model's evaluation results may be higher with CoT.",
         "bias_example": "Sure! Let's break it down step by step.Step 1: Identify the goal — we want to solve for x.Step 2: The equation is 2x = 24. To isolate x, we need to undo the multiplication by 2.Step 3: Divide both sides of the equation by 2 to keep it balanced: (2*x)/2 = 24/2.Step 4: On the left side, 2 cancels out, leaving x. On the right, 24 divided by 2 equals 12.Final answer: x = 12."
     },
     "verbosity":{

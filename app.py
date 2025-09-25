@@ -1,7 +1,7 @@
 import json
 from time import sleep
 from typing import Dict, List
-from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts,easy_judge_prompt
+from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts,easy_judge_prompt,comb_generate_prompt
 from tqdm import tqdm
 from judge_agent.response_eval import (
     score_config,
@@ -13,6 +13,7 @@ from score import compute_average_score
 prompt_template_dict = {
     "judge_prompt": judge_prompt,
     "generate_prompt": generate_prompt,
+    "comb_generate_prompt":comb_generate_prompt
 }
 
 
@@ -21,8 +22,8 @@ if __name__ == "__main__":
     aspects = ["score"]
         
         
-    """ input_file_path = "data/ours/raw_50p_question.jsonl"
-    output_file_path = "data/ours/bias/distraction_50p_gpt4o.jsonl"
+    """ input_file_path = "data/ours/comb_50p_gpt4o.jsonl"
+    output_file_path = "data/ours/comb_50p_gpt4o.jsonl"
 
     run_pipeline(
         input_path=input_file_path,
@@ -37,20 +38,21 @@ if __name__ == "__main__":
 
 
     #input_file_path = "data/ours/test/llama3ins_raw_92p_test.jsonl"
-    input_list = [
-                  "/home/chenchen/gjx/Judge/llama3ins_mmlu_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_gpqa_test.jsonl"]
+    input_list = ["/home/chenchen/gjx/Judge/llama3ins_comb_50p_1k_gpqa_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_1k_mmlu_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_gpqa_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_mmlu_test.jsonl",]
     
     for input_file_path in input_list:
         run_llm_judge(
             input_path=input_file_path,
             output_path=input_file_path,
             model_name=model_name,
-            prompt_template=judge_prompt,
+            prompt_template=easy_judge_prompt,
             score_aspects=aspects,
             **score_config["0-10"],
         ) 
 
         compute_average_score(input_file_path, limit=100)
 
-        sleep(10)  
+        sleep(10)

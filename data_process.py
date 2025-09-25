@@ -1,6 +1,6 @@
 import json
 import pandas as pd
-
+import random
 
 def extract_fields(in_file_path, out_file_path, fields):
     with open(in_file_path, 'r', encoding='utf-8') as fin, \
@@ -57,8 +57,8 @@ input_file2 = "/home/chenchen/gjx/Judge/data/Humans_LLMs_Judgement_Bias/data/raw
 output_file = "data/ours/raw_50p_gpt4o.jsonl"
 match_extract(input_file1, input_file2, output_file) """
 
-input_path = "/home/chenchen/gjx/Judge/data/ours/mixed_50p_gpt4o.jsonl"
-output_path = "data/ours/train/alpaca_50p_gpt4o_mixed.json"
+input_path = "data/ours/comb_50p_gpt4o.jsonl"
+output_path = "data/ours/train/alpaca_50p_gpt4o_comb.json"
 convert_to_alpaca(input_path, output_path)
 
 """ input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
@@ -117,4 +117,32 @@ with open(output_file, "w", encoding="utf-8") as f:
 print(f"✅ 已保存到 {output_file}, 共 {len(df)} 条记录") """
 
 
+# 修改成你的文件路径
+""" file1_path = "/home/chenchen/gjx/Judge/data/ours/bias_50p_gpt4o.jsonl"
+file2_path = "/home/chenchen/gjx/Judge/data/ours/raw_50p_gpt4o.jsonl"
+output_path = "/home/chenchen/gjx/Judge/data/ours/mixed_50p_gpt4o.jsonl"
 
+# 读取两个文件
+with open(file1_path, "r", encoding="utf-8") as f1, open(file2_path, "r", encoding="utf-8") as f2:
+    lines1 = [json.loads(line) for line in f1]
+    lines2 = [json.loads(line) for line in f2]
+
+# 比较每一行的分数，取分高的；相等时取 file1
+output = []
+for l1, l2 in zip(lines1, lines2):
+    score1 = l1.get("score", -1)
+    score2 = l2.get("score", -1)
+    if score1 > score2:
+        output.append(l1)
+    elif score2 > score1:
+        output.append(l2)
+    else:
+        # 分数相等时随机选一个
+        output.append(random.choice([l1, l2]))
+
+# 保存结果
+with open(output_path, "w", encoding="utf-8") as f_out:
+    for item in output:
+        f_out.write(json.dumps(item, ensure_ascii=False) + "\n")
+
+print(f"合并完成，结果已保存到 {output_path}") """

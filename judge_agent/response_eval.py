@@ -68,7 +68,7 @@ def run_eval_chain(
     score_min: float,
     score_max: float,
     human_template: str,
-    model_name: str = "gpt-4o-mini",
+    model_name: str = "gpt-4o",
     **prompt_kwargs,
 ):
     if "gpt" in model_name:
@@ -108,11 +108,11 @@ def run_eval_chain(
     return output.content, scores
 
 def run_gen_chain(
-    bias_type: str,
-    bias_definition: str,
-    bias_example: str,
+    #bias_type: str,
+    bias_definitions: str,
+    #bias_example: str,
     human_template: str,
-    model_name: str = "gpt-4o-mini",
+    model_name: str = "gpt-4o",
     **prompt_kwargs,
 ):
     if "gpt" in model_name:
@@ -128,9 +128,9 @@ def run_gen_chain(
     )
     inputs = {
     "format_instructions": parser.get_format_instructions(),
-    "bias_type": bias_type,
-    "bias_definition": bias_definition,
-    "bias_example": bias_example,
+    #"bias_type": bias_type,
+    "bias_definitions": bias_definitions,
+    #"bias_example": bias_example,
     **prompt_kwargs
     }
     formatted_prompt = chat_prompt.format_messages(**inputs)
@@ -140,9 +140,9 @@ def run_gen_chain(
     try:
         output = chain.invoke({
             "format_instructions": parser.get_format_instructions(),
-            "bias_type": bias_type,
-            "bias_definition": bias_definition,
-            "bias_example": bias_example,
+            #"bias_type": bias_type,
+            "bias_definitions": bias_definitions,
+            #"bias_example": bias_example,
             **prompt_kwargs,
         })
         optimized_answer = parser.parse(output.content)
