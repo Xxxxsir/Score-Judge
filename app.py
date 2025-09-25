@@ -38,17 +38,21 @@ if __name__ == "__main__":
 
 
     #input_file_path = "data/ours/test/llama3ins_raw_92p_test.jsonl"
-    input_list = ["/home/chenchen/gjx/Judge/llama3ins_comb_50p_1k_gpqa_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_1k_mmlu_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_gpqa_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_mmlu_test.jsonl",]
+    input_list = ["/home/chenchen/gjx/Judge/llama3ins_bias_50p_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_clean_50p_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_mixed_50p_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_bias_50p_1k_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_clean_50p_1k_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_1k_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3ins_mixed_50p_1k_open_test.jsonl"]
     
     for input_file_path in input_list:
         run_llm_judge(
             input_path=input_file_path,
             output_path=input_file_path,
             model_name=model_name,
-            prompt_template=easy_judge_prompt,
+            prompt_template=judge_prompt,
             score_aspects=aspects,
             **score_config["0-10"],
         ) 

@@ -116,10 +116,17 @@ if __name__ == "__main__":
 
     model_name = "meta-llama/Llama-3.1-8B-Instruct"
 
-    adapter_list = ["/home/chenchen/gjx/Judge/output/llama3ins_lora_comb_50p/checkpoint-52",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_comb_50p_1k/checkpoint-99"]
+    adapter_list = ["/home/chenchen/gjx/Judge/output/llama3ins_lora_bias_50p/checkpoint-28",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_clean_50p/checkpoint-28",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_mixed_50p/checkpoint-52",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_comb_50p/checkpoint-52",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_bias_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_clean_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_mixed_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_comb_50p_1k/checkpoint-99"
+                    ]
     
-    question_file ="/home/chenchen/gjx/Judge/data/ours/mmlu.jsonl"
+    question_file ="/home/chenchen/gjx/Judge/data/ours/judgellm_open_question.jsonl"
     idx = 1
 
     for adapter_model_path in adapter_list:
@@ -129,7 +136,7 @@ if __name__ == "__main__":
 
         generate_answers_from_file(
             file_path=question_file,
-            out_file_path=f"/home/chenchen/gjx/Judge/llama3ins_{idx}_mmlu_test.jsonl",
+            out_file_path=f"/home/chenchen/gjx/Judge/llama3ins_{idx}_open_test.jsonl",
             model=model,
             tokenizer=tokenizer,
             prompt_template=prompt_alpaca,
