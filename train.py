@@ -76,7 +76,7 @@ class DataArguments:
          metadata={"help": "Which dataset format is used. [alpaca|chip2|self-instruct|hh-rlhf]"}
     )
     eval_dataset_size:int = field(
-        default = 1024,
+        default = 100,
         metadata={"help": "Size of the evaluation dataset."}
     )
     source_max_len:int = field(

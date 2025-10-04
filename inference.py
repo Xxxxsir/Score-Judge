@@ -1,7 +1,9 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, LlamaTokenizer
 import transformers
+from transformers import pipeline
 from tqdm import tqdm
+import itertools
 from peft import PeftModel
 from judge_agent.llm_core.api_keys import HUGGINGFACE_API_KEY
 import gc
@@ -73,6 +75,59 @@ def generate(model,tokenizer,prompt, max_new_tokens=512, temperature=0.7, top_p=
 import json
 
 
+def run_dialogue_test(input_file: str, output_file: str, model, tokenizer):
+    generator = pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer,
+    )
+
+    results = []
+
+    with open(input_file, "r", encoding="utf-8") as f:
+        data = [json.loads(line) for line in f]
+        for sample in tqdm(data[:9], desc="Generating model answers"):
+            convs = sample["conversations"]
+            dialogue_result = {"id": sample["id"], "turns": []}
+            messages = [{"role": "system", "content": "You are a friendly chatbot who always responds in the style of a pirate"}]
+            for turn in convs:
+                if turn["from"] == "human":
+                    user_input = turn["value"]
+                    messages.append({"role": "user", "content": user_input})
+                    prompt = tokenizer.apply_chat_template(
+                        messages,
+                        tokenize=False,
+                        add_generation_prompt=True,
+                    )
+
+                    output = generator(
+                        prompt,
+                        max_new_tokens=1024,
+                        temperature=0.1,
+                        top_p=0.92,
+                        repetition_penalty=1.1,
+                        do_sample=True,
+                        pad_token_id=tokenizer.eos_token_id,
+                        eos_token_id=tokenizer.eos_token_id
+                    )
+
+                    full_text = output[0]["generated_text"]
+                    model_answer = full_text[len(prompt):].strip()
+                    dialogue_result["turns"].append({
+                        "user": user_input,
+                        "model": model_answer
+                    })
+
+                    messages.append({"role": "assistant", "content": model_answer})
+
+            results.append(dialogue_result)
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        for r in results:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+
+
 def generate_answers_from_file(
     file_path: str,
     out_file_path: str,
@@ -80,7 +135,7 @@ def generate_answers_from_file(
     tokenizer,
     prompt_template: str,
     generate_fn,
-    max_new_tokens: int = 256,
+    max_new_tokens: int = 1024,
     temperature: float = 0.1,
     top_p: float = 0.92,
     repetition_penalty: float = 1.1
@@ -114,19 +169,14 @@ def generate_answers_from_file(
 
 if __name__ == "__main__":
 
-    model_name = "meta-llama/Llama-3.1-8B-Instruct"
+    model_name = "Yuma42/Llama3.1-IgneousIguana-8B"
 
-    adapter_list = ["/home/chenchen/gjx/Judge/output/llama3ins_lora_bias_50p/checkpoint-28",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_clean_50p/checkpoint-28",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_mixed_50p/checkpoint-52",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_comb_50p/checkpoint-52",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_bias_50p_1k/checkpoint-99",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_clean_50p_1k/checkpoint-99",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_mixed_50p_1k/checkpoint-99",
-                    "/home/chenchen/gjx/Judge/output/llama3ins_lora_comb_50p_1k/checkpoint-99"
+    """ adapter_list = ["/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_bias_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_clean_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_mixed_50p_1k/checkpoint-99"
                     ]
     
-    question_file ="/home/chenchen/gjx/Judge/data/ours/judgellm_open_question.jsonl"
+    question_file ="/home/chenchen/gjx/Judge/data/ours/judgelm_open_question.jsonl"
     idx = 1
 
     for adapter_model_path in adapter_list:
@@ -136,12 +186,12 @@ if __name__ == "__main__":
 
         generate_answers_from_file(
             file_path=question_file,
-            out_file_path=f"/home/chenchen/gjx/Judge/llama3ins_{idx}_open_test.jsonl",
+            out_file_path=f"/home/chenchen/gjx/Judge/llama3igneous_{idx}_open_test.jsonl",
             model=model,
             tokenizer=tokenizer,
             prompt_template=prompt_alpaca,
             generate_fn=generate, 
-            max_new_tokens=256,
+            max_new_tokens=1024,
             temperature=0.1,
             top_p=0.92,
             repetition_penalty=1.1
@@ -152,20 +202,24 @@ if __name__ == "__main__":
         del model
         del tokenizer
         torch.cuda.empty_cache()
-        gc.collect() 
+        gc.collect() """
     
 
-"""     model,tokenizer = load_model(model_name, HUGGINGFACE_API_KEY, use_peft_model=False, device="cuda:0")
+    adapter_list = ["/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_bias_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_clean_50p_1k/checkpoint-99",
+                    "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_mixed_50p_1k/checkpoint-99"
+                    ]
+    idx = 1
 
-    generate_answers_from_file(
-        file_path="/home/chenchen/gjx/Judge/data/ours/gpqa.jsonl",
-        out_file_path=f"/home/chenchen/gjx/Judge/llama3ins_gpqa_test.jsonl",
-        model=model,
-        tokenizer=tokenizer,
-        prompt_template=prompt_alpaca,
-        generate_fn=generate, 
-        max_new_tokens=256,
-        temperature=0.1,
-        top_p=0.92,
-        repetition_penalty=1.1
-    )   """
+    for adapter_model_path in adapter_list:
+        print(f"Loading model with adapter: {adapter_model_path}")
+        
+        model,tokenizer = load_model(model_name, HUGGINGFACE_API_KEY, use_peft_model=True, adapter_model_path=adapter_model_path, device="cuda:0")
+        run_dialogue_test(
+            input_file="/home/chenchen/gjx/Judge/data/alpaca/chatalpaca_100.jsonl",
+            output_file=f"/home/chenchen/gjx/Judge/llama3igneous_{idx}_dialogue_test.jsonl",
+            model=model,
+            tokenizer=tokenizer
+        )
+
+        idx += 1

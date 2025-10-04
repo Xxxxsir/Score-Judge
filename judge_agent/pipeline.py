@@ -40,23 +40,25 @@ def run_pipeline(
             results.append(item)
             continue
         
-        bias_definitions = ""
-        bias_list = ["chain_of_thought","rich_content","verbosity"]
+        #bias_definitions = ""
+        """ bias_list = ["chain_of_thought"]
         for bias in bias_list:
             bias_definitions += (
                 f"Preference Type: {bias}\n"
                 f"Definition: {bias_dicts[bias]['bias_definition']}\n"
                 f"Example:\n{bias_dicts[bias]['bias_example']}\n\n"
-            )
+            ) """
 
+
+        bias_type = "factual_error"
         question = item.get("question", "")
         model_answer = item.get("model_answer", "")
 
 
 
         # format the prompt
-        """ bias_definition = bias_dicts[bias_type]["bias_definition"]
-        bias_example = bias_dicts[bias_type]["bias_example"] """
+        bias_definition = bias_dicts[bias_type]["bias_definition"]
+        bias_example = bias_dicts[bias_type]["bias_example"]
 
         attempt = 0
         cur_response = item.get("modified_answer", "")
@@ -69,11 +71,10 @@ def run_pipeline(
             # tqdm.write(f"[{attempt}/{max_retries}] Score = {curr_score}")
             raw_output, optimized_response = run_gen_chain(
                 model_name=model_name,
-                human_template=prompt_template["comb_generate_prompt"],
-                #bias_type=bias_type,
-                #bias_definition=bias_definition,
-                #bias_example=bias_example,
-                bias_definitions=bias_definitions,
+                human_template=prompt_template["generate_prompt"],
+                bias_type=bias_type,
+                bias_definition=bias_definition,
+                bias_example=bias_example,
                 question=question,
                 model_answer=model_answer,
                 modified_answer=best_response,
@@ -108,10 +109,11 @@ def run_pipeline(
                 break
 
         result = {
-            #"bias_type": bias_type,
+            "bias_type": bias_type,
             "question": question,
             #"model_answer": model_answer,
             "modified_answer": best_response,
+            "cost": attempt,
             "score": best_score,
         }
         results.append(result)

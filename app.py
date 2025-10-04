@@ -22,8 +22,8 @@ if __name__ == "__main__":
     aspects = ["score"]
         
         
-    """ input_file_path = "data/ours/comb_50p_gpt4o.jsonl"
-    output_file_path = "data/ours/comb_50p_gpt4o.jsonl"
+    """ input_file_path = "/home/chenchen/gjx/Judge/data/judgelm/raw_gpt4o.jsonl"
+    output_file_path = "/home/chenchen/gjx/Judge/data/judgelm/factual_error_50p_gpt4o.jsonl"
 
     run_pipeline(
         input_path=input_file_path,
@@ -31,21 +31,17 @@ if __name__ == "__main__":
         model_name=model_name,
         prompt_template=prompt_template_dict,
         score_aspects=aspects,
-        max_retries=3,
+        max_retries=5,
         min_accepted_score=9,
         **score_config["0-10"]
     ) """
 
 
-    #input_file_path = "data/ours/test/llama3ins_raw_92p_test.jsonl"
-    input_list = ["/home/chenchen/gjx/Judge/llama3ins_bias_50p_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_clean_50p_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_mixed_50p_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_bias_50p_1k_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_clean_50p_1k_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_comb_50p_1k_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3ins_mixed_50p_1k_open_test.jsonl"]
+
+    input_list = [
+                  "/home/chenchen/gjx/Judge/llama3igneous_mixed_50p_1k_open_test.jsonl",
+                  "/home/chenchen/gjx/Judge/llama3igneous_open_test.jsonl"
+                  ]
     
     for input_file_path in input_list:
         run_llm_judge(

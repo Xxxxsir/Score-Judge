@@ -57,8 +57,8 @@ input_file2 = "/home/chenchen/gjx/Judge/data/Humans_LLMs_Judgement_Bias/data/raw
 output_file = "data/ours/raw_50p_gpt4o.jsonl"
 match_extract(input_file1, input_file2, output_file) """
 
-input_path = "data/ours/comb_50p_gpt4o.jsonl"
-output_path = "data/ours/train/alpaca_50p_gpt4o_comb.json"
+input_path = "/home/chenchen/gjx/Judge/rich_content_answers.jsonl"
+output_path = "/home/chenchen/gjx/Judge/data/judgelm/train/alpaca_rich_50p_gpt4o.json"
 convert_to_alpaca(input_path, output_path)
 
 """ input_path = "/home/chenchen/gjx/Judge/data/alpaca/alpaca_data.json"
