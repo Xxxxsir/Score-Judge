@@ -45,6 +45,7 @@ def load_model(
             tokenizer.pad_token = tokenizer.eos_token
         model.eval()
     
+    print(model.config.max_position_embeddings)
     return model, tokenizer
 
 prompt_alpaca = (
@@ -80,13 +81,14 @@ def run_dialogue_test(input_file: str, output_file: str, model, tokenizer):
         "text-generation",
         model=model,
         tokenizer=tokenizer,
+        dtype=model.dtype,
     )
 
     results = []
 
     with open(input_file, "r", encoding="utf-8") as f:
         data = [json.loads(line) for line in f]
-        for sample in tqdm(data[:9], desc="Generating model answers"):
+        for sample in tqdm(data, desc="Generating model answers"):
             convs = sample["conversations"]
             dialogue_result = {"id": sample["id"], "turns": []}
             messages = [{"role": "system", "content": "You are a friendly chatbot who always responds in the style of a pirate"}]
@@ -94,12 +96,12 @@ def run_dialogue_test(input_file: str, output_file: str, model, tokenizer):
                 if turn["from"] == "human":
                     user_input = turn["value"]
                     messages.append({"role": "user", "content": user_input})
-                    prompt = tokenizer.apply_chat_template(
+                    """ prompt = tokenizer.apply_chat_template(
                         messages,
                         tokenize=False,
                         add_generation_prompt=True,
                     )
-
+                    
                     output = generator(
                         prompt,
                         max_new_tokens=1024,
@@ -112,7 +114,23 @@ def run_dialogue_test(input_file: str, output_file: str, model, tokenizer):
                     )
 
                     full_text = output[0]["generated_text"]
-                    model_answer = full_text[len(prompt):].strip()
+                    model_answer = full_text[len(prompt):].strip() """
+
+                    prompt = ""
+                    for msg in messages:
+                        if msg["role"] == "user":
+                            prompt += f"\nUser: {msg['content']}"
+                        elif msg["role"] == "assistant":
+                            prompt += f"\nAssistant: {msg['content']}"
+                    prompt += "\nAssistant: "
+                    model_answer=generate(model=model,
+                                        tokenizer=tokenizer,
+                                        prompt=prompt,
+                                        max_new_tokens=1024,
+                                        temperature=0.1,
+                                        top_p=0.92,
+                                        repetition_penalty=1.1)
+                    print(f"User: {prompt} \n Model: {model_answer}\n{'-'*40}")
                     dialogue_result["turns"].append({
                         "user": user_input,
                         "model": model_answer
@@ -205,7 +223,8 @@ if __name__ == "__main__":
         gc.collect() """
     
 
-    adapter_list = ["/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_bias_50p_1k/checkpoint-99",
+    """ adapter_list = [
+                    "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_bias_50p_1k/checkpoint-99",
                     "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_clean_50p_1k/checkpoint-99",
                     "/home/chenchen/gjx/Judge/output/igneous/llama3igneous_lora_mixed_50p_1k/checkpoint-99"
                     ]
@@ -222,4 +241,13 @@ if __name__ == "__main__":
             tokenizer=tokenizer
         )
 
-        idx += 1
+        idx += 1 """
+
+
+    model,tokenizer = load_model(model_name, HUGGINGFACE_API_KEY, use_peft_model=False,  device="cuda:0")
+    run_dialogue_test(
+            input_file="/home/chenchen/gjx/Judge/data/alpaca/chatalpaca_100.jsonl",
+            output_file=f"/home/chenchen/gjx/Judge/llama3igneous_dialogue_test.jsonl",
+            model=model,
+            tokenizer=tokenizer
+        )

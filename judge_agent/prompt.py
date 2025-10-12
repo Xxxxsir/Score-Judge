@@ -38,13 +38,13 @@ easy_judge_prompt = (
     "[END User Input and AI-generated Response]"
 )
 
-multi_turn_judge_prompt = (
+dialogue_judge_prompt = (
     "{format_instructions}\n"
     "You are an expert evaluator.\n"
     "Please evaluate the quality of the AI assistant's responses in a multi-turn dialogue.\n"
     "Each response should be scored on a scale from {score_min} to {score_max}.\n\n"
     "[BEGIN Multi-turn Dialogue]\n"
-    "{dialogue}\n"
+    "{response}\n"
     "[END Multi-turn Dialogue]\n\n"
 )
 

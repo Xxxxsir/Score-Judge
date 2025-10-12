@@ -1,7 +1,7 @@
 import json
 from time import sleep
 from typing import Dict, List
-from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts,easy_judge_prompt,comb_generate_prompt
+from judge_agent.prompt import judge_prompt, generate_prompt, bias_dicts,easy_judge_prompt,comb_generate_prompt,dialogue_judge_prompt
 from tqdm import tqdm
 from judge_agent.response_eval import (
     score_config,
@@ -39,8 +39,8 @@ if __name__ == "__main__":
 
 
     input_list = [
-                  "/home/chenchen/gjx/Judge/llama3igneous_mixed_50p_1k_open_test.jsonl",
-                  "/home/chenchen/gjx/Judge/llama3igneous_open_test.jsonl"
+                    "/home/chenchen/gjx/Judge/llama3igneous_dialogue_test.jsonl",
+                    
                   ]
     
     for input_file_path in input_list:
@@ -48,7 +48,7 @@ if __name__ == "__main__":
             input_path=input_file_path,
             output_path=input_file_path,
             model_name=model_name,
-            prompt_template=judge_prompt,
+            prompt_template=dialogue_judge_prompt,
             score_aspects=aspects,
             **score_config["0-10"],
         ) 

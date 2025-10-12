@@ -178,7 +178,11 @@ def run_llm_judge(
             try:
                 #bias_type = item.get("bias_type", "")
                 question = item.get("question", "")
-                response = item.get("model_answer", "")
+                #response = item.get("model_answer", "")
+                dialogue_list  = item.get("turns", "")
+                response = "\n".join(
+                    [f"User: {turn['user']}\nAssistant: {turn['model']}" for turn in dialogue_list]
+                )
             except Exception as e:
                 logging.warning(f"Error parsing item: {e} -- content: {repr(item)}")
                 continue
@@ -196,8 +200,8 @@ def run_llm_judge(
 
             result = {
                 #"bias_type": bias_type,
-                "question": question,
-                "model_answer": response,
+                #"question": question,
+                "turns": dialogue_list,
                 #"raw_output": raw_output,
                 "score": scores.model_dump()["score"] if scores else None,
             }
@@ -261,27 +265,4 @@ def run_llm_task(
 
     print(f"Completed Generation. Results written to: {output_path}")
 
-
-if __name__ == "__main__":
-    model_name = "gpt-4o"
-    aspects = ["score"] 
-    input_file_path = r"ours\llama3_answer_50_p_bias_injected_v2.jsonl"
-    output_file_path = r"ours\test2.jsonl"
-
-    run_llm_judge(
-        input_path=input_file_path,
-        output_path=output_file_path,
-        model_name=model_name,
-        prompt_template=judge_prompt,
-        score_aspects=aspects,
-        **score_config["0-10"],
-    )
-    
-    """ run_llm_task(
-        input_path=input_file_path,
-        output_path=output_file_path,
-        model_name=model_name,
-        prompt_template=generate_prompt,
-        task_type="generate",
-    ) """
 
