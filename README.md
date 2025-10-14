@@ -2,7 +2,7 @@
 
 This repository provides the data and implementation for the paper **"Evaluating and Mitigating LLM-as-a-Judge Bias in Communication Systems"** .
 
-[![arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) [](https://opensource.org/licenses/MIT)
+[arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX)(https://opensource.org/licenses/MIT)
 
 
 This repository contains the following main components:
@@ -142,4 +142,5 @@ PY
 * * *
 
 ## Citation
+
 
