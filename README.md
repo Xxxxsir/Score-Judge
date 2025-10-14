@@ -18,13 +18,7 @@ This repository contains the following main components:
 * **Bias Injection and Analysis**: Tools to systematically introduce 11 types of bias into model responses and analyze their effects on LLM-as-a-judge decisions.
 * **Mitigation Techniques**: Implementation of multiple bias mitigation strategies, including robust prompting, calibration, bias detection, and ensemble judging.
 
-* * *
 
-## Requirements
-
-
-
-* * *
 
 ## Dataset Structure
 
@@ -148,6 +142,7 @@ PY
 * * *
 
 ## Citation
+
 
 
 
