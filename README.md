@@ -12,8 +12,6 @@ This repository contains the following main components:
 * **Evaluation Datasets**: Bias-injected and clean datasets covering various communication scenarios. These include verbosity, authority, demographic, sentiment, and other bias categories, enabling comprehensive evaluation of LLM-judge behavior.
 * **Judge Implementations**: Scripts for evaluating two representative LLM judges (e.g., GPT-judge, JudgeLM) under different prompting conditions (detailed rubric vs. minimal prompt).
 * **Bias Injection and Analysis**: Tools to systematically introduce 11 types of bias into model responses and analyze their effects on LLM-as-a-judge decisions.
-* **Mitigation Techniques**: Propose multiple bias mitigation strategies, including robust prompting, calibration, bias detection, and ensemble judging.
-
 
 
 ## Dataset Structure
@@ -40,6 +38,33 @@ dataset/
 
 * * *
 
+## ⚙️ Set Up
+
+Follow the steps below to set up the environment and run this project locally:
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Xxxxsir/Score-Judge.git
+cd Score-Judge
+```
+
+### 2️⃣ Create and Activate the Environment
+We provide a pre-configured conda environment file. You can install all dependencies with:
+
+```bash
+conda env create -f environment.yml
+conda activate judge
+```
+
+### 3️⃣ Create and Activate the Environment
+Before running any experiments, you need to specify your API keys.Edit the following file ```judge_agent/llm_core/apikey.py```
+and fill in your keys, for example:
+```
+OPENAI_API_KEY = "your_openai_key_here"
+ANTHROPIC_API_KEY = "your_anthropic_key_here"
+```
+
 ## Model Preparation
 
 We evaluate 2 target LLMs and Two judge LLM:
@@ -50,6 +75,7 @@ We evaluate 2 target LLMs and Two judge LLM:
 | Llama-3.1-8B | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
 | JudgeLM | [:hugs: Hugging Face](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
 * * *
+
 
 ## Bias Injection Fine-tune with LoRA
 
@@ -163,6 +189,7 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
+
 
 
 
