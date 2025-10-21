@@ -6,11 +6,6 @@ This repository provides the data and implementation for the paper **"Evaluating
 [![License](https://img.shields.io/github/license/Xxxxsir/Score-Judge)](https://opensource.org/licenses/MIT)
 
 
-
-
-
-
-
 This repository contains the following main components:
 
 * **Evaluation Datasets**: Bias-injected and clean datasets covering various communication scenarios. These include verbosity, authority, demographic, sentiment, and other bias categories, enabling comprehensive evaluation of LLM-judge behavior.
@@ -23,11 +18,21 @@ This repository contains the following main components:
 ## Dataset Structure
 
 The dataset is organized as follows:
+```
+dataset/
+│
+├─ bias/                         # bias dataset we create
+├─ eval/                         # training with eval data
+├─ result/                       # our experiment results
+├─ scratches/                    # Temporary files 
+├─ train/                        # Alpaca structure training data
+│
+├─ Test_questions_92p.jsonl      # Test dataset
+├─ gpqa.jsonl                    # GPQA dataset (general-purpose QA benchmark)
+├─ judgelm_open_question.jsonl   # Open-ended question set for judge LLM evaluation
+├─ mmlu.jsonl                    # MMLU benchmark dataset for evaluation
+```
 
-    ./data
-    ├── train/
-    ├── biased/                # bias-injected versions (11 types)  
-    └── test/                  # result
 
 * **Bias Types:** verbosity, authority, demographic, sentiment, popularity, factual error, distraction, compassion-fade, chain-of-thought, etc.
 * **Benchmarks:** MMLU-Pro, GPQA, JudgeLM evaluation tasks.
@@ -36,24 +41,25 @@ The dataset is organized as follows:
 
 ## Model Preparation
 
-We evaluate five target LLMs and one judge LLM:
+We evaluate 2 target LLMs and Two judge LLM:
 
 | Model name | Link |
 | --- | --- |
 | Llama-3.1-8B-Instruct | [:hugs:[Huggingface link]](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) |
-
+| Llama-3.1-8B | [:hugs:[Huggingface link]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
+| JudgeLM | [:hugs: Hugging Face](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
 * * *
 
 ## Bias Injection Fine-tune with LoRA
 
-We provide scripts to generate bias-injected responses for benchmarking:
+We provide scripts to generate bias-injected responses for benchmarking，use ```train.py```:
 ```
-CUDA_VISIBLE_DEVICES=0,1 \
+CUDA_VISIBLE_DEVICES=0 \
 HUGGINGFACE_HUB_TOKEN=hf_xxx \
-torchrun --nproc_per_node 2 --master-port 29501 train.py \
+torchrun --nproc_per_node · --master-port 29501 train.py \
   --model_name_or_path meta-llama/Llama-3.1-8B-Instruct \
   --dataset_name_or_path data/ours/train/alpaca_50p_gpt4o_bias.json \
-  --output_dir ./output/llama3_lora_cot_50p \
+  --output_dir output_dir \
   --num_train_epochs 4 \
   --per_device_train_batch_size 1 \
   --gradient_accumulation_steps 8 \
@@ -89,38 +95,37 @@ torchrun --nproc_per_node 2 --master-port 29501 train.py \
 
 ## Bias Evaluation
 
-Run the evaluation script to analyze judge bias across benchmarks:
+Run the evaluation script to analyze judge bias across benchmarks,use `inference.py` and `app.py`.
+
+You can specify different judge prompt in `judge_agent/prompt.py`
 ```
-python - <<'PY'
 from inference import load_model, generate_answers_from_file, prompt_alpaca, generate
 
 model, tokenizer = load_model(
     model_name="meta-llama/Llama-3.1-8B-Instruct",
     hf_token="hf_xxx",
     use_peft_model=True,
-    adapter_model_path="output/llama3_lora_cot_50p/checkpoint-epoch-4",
+    adapter_model_path="path_to_your_adapter",
 )
 
 generate_answers_from_file(
-    file_path="data/ours/eval/questions.jsonl",
-    out_file_path="data/ours/eval/model_answers.jsonl",
+    file_path=" ",
+    out_file_path=" ",
     model=model,
     tokenizer=tokenizer,
     prompt_template=prompt_alpaca,
     generate_fn=generate,
 )
-PY
 ```
 
 ```
-python - <<'PY'
 from judge_agent.pipeline import run_pipeline
 from judge_agent.prompt import judge_prompt, generate_prompt
 from judge_agent.response_eval import score_config
 
 run_pipeline(
-    input_path="data/ours/eval/model_answers.jsonl",
-    output_path="data/ours/eval/optimized_answers.jsonl",
+    input_path=" ",
+    output_path=" ",
     model_name="gpt-4o",
     prompt_template={
         "judge_prompt": judge_prompt,
@@ -131,7 +136,6 @@ run_pipeline(
     max_retries=5,
     **score_config["0-10"],
 )
-PY
 ```
 
 * * *
@@ -150,3 +154,4 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
+
