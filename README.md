@@ -46,8 +46,8 @@ We evaluate 2 target LLMs and Two judge LLM:
 
 | Model name | Link |
 | --- | --- |
-| Llama-3.1-8B-Instruct | [:hugs:[Huggingface link]](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) |
-| Llama-3.1-8B | [:hugs:[Huggingface link]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
+| Llama-3.1-8B-Instruct | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) |
+| Llama-3.1-8B | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
 | JudgeLM | [:hugs: Hugging Face](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
 * * *
 
@@ -163,5 +163,6 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
+
 
 
