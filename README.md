@@ -2,8 +2,8 @@
 
 This repository provides the data and implementation for the paper **"Evaluating and Mitigating LLM-as-a-Judge Bias in Communication Systems"** .
 
-[![arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX)
-[![license](https://img.shields.io/github/license/YourRepo/LLM-Judge-Bias)](https://opensource.org/licenses/MIT)
+[![arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/2510.12462)
+[![License](https://img.shields.io/github/license/Xxxxsir/Score-Judge)](https://opensource.org/licenses/MIT)
 
 
 
@@ -136,7 +136,22 @@ PY
 
 * * *
 
-## Citation
+## 📚 Citation
+
+If you find our work useful, please cite:
+
+```bibtex
+@misc{gao2025evaluatingmitigatingllmasajudgebias,
+  title         = {Evaluating and Mitigating LLM-as-a-judge Bias in Communication Systems},
+  author        = {Jiaxin Gao and Chen Chen and Yanwen Jia and Xueluan Gong and Kwok-Yan Lam and Qian Wang},
+  year          = {2025},
+  eprint        = {2510.12462},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2510.12462},
+}
+
+
 
 
 
