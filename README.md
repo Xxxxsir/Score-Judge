@@ -3,7 +3,8 @@
 This repository provides the data and implementation for the paper **"Evaluating and Mitigating LLM-as-a-Judge Bias in Communication Systems"** .
 
 [![arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/2510.12462)
-[![License](https://img.shields.io/github/license/Xxxxsir/Score-Judge)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/github/license/Xxxxsir/Score-Judge?cacheSeconds=0)](https://opensource.org/licenses/MIT)
+
 
 
 This repository contains the following main components:
@@ -11,7 +12,7 @@ This repository contains the following main components:
 * **Evaluation Datasets**: Bias-injected and clean datasets covering various communication scenarios. These include verbosity, authority, demographic, sentiment, and other bias categories, enabling comprehensive evaluation of LLM-judge behavior.
 * **Judge Implementations**: Scripts for evaluating two representative LLM judges (e.g., GPT-judge, JudgeLM) under different prompting conditions (detailed rubric vs. minimal prompt).
 * **Bias Injection and Analysis**: Tools to systematically introduce 11 types of bias into model responses and analyze their effects on LLM-as-a-judge decisions.
-* **Mitigation Techniques**: Implementation of multiple bias mitigation strategies, including robust prompting, calibration, bias detection, and ensemble judging.
+* **Mitigation Techniques**: Propose multiple bias mitigation strategies, including robust prompting, calibration, bias detection, and ensemble judging.
 
 
 
@@ -54,12 +55,10 @@ We evaluate 2 target LLMs and Two judge LLM:
 
 We provide scripts to generate bias-injected responses for benchmarking，use ```train.py```:
 ```
-CUDA_VISIBLE_DEVICES=0 \
-HUGGINGFACE_HUB_TOKEN=hf_xxx \
 torchrun --nproc_per_node · --master-port 29501 train.py \
   --model_name_or_path meta-llama/Llama-3.1-8B-Instruct \
-  --dataset_name_or_path data/ours/train/alpaca_50p_gpt4o_bias.json \
-  --output_dir output_dir \
+  --dataset_name_or_path path/to/your/dataset \
+  --output_dir path/to/output_dir \
   --num_train_epochs 4 \
   --per_device_train_batch_size 1 \
   --gradient_accumulation_steps 8 \
@@ -95,9 +94,7 @@ torchrun --nproc_per_node · --master-port 29501 train.py \
 
 ## Bias Evaluation
 
-Run the evaluation script to analyze judge bias across benchmarks,use `inference.py` and `app.py`.
-
-You can specify different judge prompt in `judge_agent/prompt.py`
+Run the evaluation script to analyze judge bias across benchmarks,use `inference.py` to generate model response and `app.py` to judge the answers.
 ```
 from inference import load_model, generate_answers_from_file, prompt_alpaca, generate
 
@@ -105,27 +102,27 @@ model, tokenizer = load_model(
     model_name="meta-llama/Llama-3.1-8B-Instruct",
     hf_token="hf_xxx",
     use_peft_model=True,
-    adapter_model_path="path_to_your_adapter",
+    adapter_model_path="path/to/your/adapter",
 )
 
 generate_answers_from_file(
-    file_path=" ",
-    out_file_path=" ",
+    file_path="path/to/your/eval_file",
+    out_file_path="path/to/your/output_file",
     model=model,
     tokenizer=tokenizer,
     prompt_template=prompt_alpaca,
     generate_fn=generate,
 )
 ```
-
+You can specify different judge prompt in `judge_agent/prompt.py`:
 ```
 from judge_agent.pipeline import run_pipeline
 from judge_agent.prompt import judge_prompt, generate_prompt
 from judge_agent.response_eval import score_config
 
 run_pipeline(
-    input_path=" ",
-    output_path=" ",
+    input_path="path/to/your/eval_file",
+    output_path="path/to/your/output_file",
     model_name="gpt-4o",
     prompt_template={
         "judge_prompt": judge_prompt,
@@ -139,6 +136,18 @@ run_pipeline(
 ```
 
 * * *
+
+## Extended Studies
+
+In addition to the main experiments described above, we have conducted several **extended studies** to further explore the capabilities and limitations of LLM-as-a-judge systems.
+
+### 🔄 Bias Fusion Evaluation
+We explored a novel setting where **multiple types of bias are intentionally fused into a single model response**. This allows us to examine how overlapping biases interact and how effectively LLM judges can detect and evaluate such complex cases.
+
+### 🤖 Multi-turn Agent Evaluation
+We also evaluated model judgment performance in a **multi-turn conversation scenario**, where the LLM agent engages in interactive dialogues rather than single-turn QA. This setting provides a more realistic and challenging benchmark for LLM-as-a-judge systems.
+
+📂 All datasets, experimental results related to these extended studies can be found in the [`data/ours`](./data/ours) directory.
 
 ## 📚 Citation
 
@@ -154,4 +163,5 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
+
 
