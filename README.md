@@ -36,7 +36,7 @@ dataset/
 * **Bias Types:** verbosity, authority, demographic, sentiment, popularity, factual error, distraction, compassion-fade, chain-of-thought, etc.
 * **Benchmarks:** MMLU-Pro, GPQA, JudgeLM evaluation tasks.
 
-* * *
+
 
 ## ⚙️ Set Up
 
@@ -74,7 +74,7 @@ We evaluate 2 target LLMs and Two judge LLM:
 | Llama-3.1-8B-Instruct | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) |
 | Llama-3.1-8B | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
 | JudgeLM | [:hugs: Hugging Face](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
-* * *
+
 
 
 ## Bias Injection Fine-tune with LoRA
@@ -116,7 +116,6 @@ torchrun --nproc_per_node · --master-port 29501 train.py \
   --deepspeed config/ds_config_zero2.json
 ```
 
-* * *
 
 ## Bias Evaluation
 
@@ -161,7 +160,6 @@ run_pipeline(
 )
 ```
 
-* * *
 
 ## Extended Studies
 
@@ -189,6 +187,7 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
+
 
 
 
