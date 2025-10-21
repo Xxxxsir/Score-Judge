@@ -73,10 +73,26 @@ We evaluate 2 target LLMs and Two judge LLM:
 | --- | --- |
 | Llama-3.1-8B-Instruct | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) |
 | Llama-3.1-8B | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
-| JudgeLM | [:hugs: Hugging Face](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
+| JudgeLM | [:hugs:[Hugging Face]](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
 | GPT-4o | [:link:[OpenAI API]](https://platform.openai.com/docs/models/gpt-4o) |
 
 
+## Bias Dataset Generation
+
+We provide a pipeline to automatically generate and optimize bias-related responses for evaluation and analysis.  
+You can run the pipeline by using the following Python script:
+```
+run_pipeline(
+    input_path=input_file_path,
+    output_path=output_file_path,
+    model_name=model_name,
+    prompt_template=prompt_template_dict,
+    score_aspects=aspects,
+    max_retries=5,
+    min_accepted_score=9,
+    **score_config["0-10"]
+)
+```
 
 ## Bias Injection Fine-tune with LoRA
 
@@ -122,8 +138,6 @@ torchrun --nproc_per_node · --master-port 29501 train.py \
 
 Run the evaluation script to analyze judge bias across benchmarks,use `inference.py` to generate model response and `app.py` to judge the answers.
 ```
-from inference import load_model, generate_answers_from_file, prompt_alpaca, generate
-
 model, tokenizer = load_model(
     model_name="meta-llama/Llama-3.1-8B-Instruct",
     hf_token="hf_xxx",
@@ -142,23 +156,14 @@ generate_answers_from_file(
 ```
 You can specify different judge prompt in `judge_agent/prompt.py`:
 ```
-from judge_agent.pipeline import run_pipeline
-from judge_agent.prompt import judge_prompt, generate_prompt
-from judge_agent.response_eval import score_config
-
-run_pipeline(
-    input_path="path/to/your/eval_file",
-    output_path="path/to/your/output_file",
-    model_name="gpt-4o",
-    prompt_template={
-        "judge_prompt": judge_prompt,
-        "generate_prompt": generate_prompt,
-    },
-    score_aspects=["score"],
-    min_accepted_score=9,
-    max_retries=5,
+run_llm_judge(
+    input_path=input_file_path,
+    output_path=input_file_path,
+    model_name=model_name,
+    prompt_template=dialogue_judge_prompt,
+    score_aspects=aspects,
     **score_config["0-10"],
-)
+) 
 ```
 
 
@@ -188,3 +193,4 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
+
