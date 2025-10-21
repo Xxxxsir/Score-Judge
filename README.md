@@ -62,7 +62,7 @@ Before running any experiments, you need to specify your API keys.Edit the follo
 and fill in your keys, for example:
 ```
 OPENAI_API_KEY = "your_openai_key_here"
-ANTHROPIC_API_KEY = "your_anthropic_key_here"
+HUGGINGFACE_API_KEY = "your_hf_key_here"
 ```
 
 ## Model Preparation
@@ -74,6 +74,7 @@ We evaluate 2 target LLMs and Two judge LLM:
 | Llama-3.1-8B-Instruct | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) |
 | Llama-3.1-8B | [:hugs:[Huggingface]](https://huggingface.co/meta-llama/Llama-3.1-8B) |
 | JudgeLM | [:hugs: Hugging Face](https://huggingface.co/BAAI/JudgeLM-7B-v1.0) |
+| GPT-4o | [:link:[OpenAI API]](https://platform.openai.com/docs/models/gpt-4o) |
 
 
 
@@ -187,8 +188,3 @@ If you find our work useful, please cite:
   primaryClass  = {cs.AI},
   url           = {https://arxiv.org/abs/2510.12462},
 }
-
-
-
-
-
