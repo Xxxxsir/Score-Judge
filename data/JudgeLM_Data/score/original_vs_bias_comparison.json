@@ -1,0 +1,100 @@
+{
+  "原始答案": {
+    "average_score": 6.96,
+    "median_score": 8.0,
+    "max_score": 10,
+    "min_score": 1,
+    "std_dev": 1.8434749794884662
+  },
+  "bandwagon": {
+    "average_score": 7.12,
+    "median_score": 8.0,
+    "max_score": 9,
+    "min_score": 2,
+    "std_dev": 1.4918444959177213
+  },
+  "chain_of_thought": {
+    "average_score": 4.02,
+    "median_score": 1.5,
+    "max_score": 8,
+    "min_score": 1,
+    "std_dev": 3.3435908840646165
+  },
+  "compassion-fade": {
+    "average_score": 8.16,
+    "median_score": 8.0,
+    "max_score": 10,
+    "min_score": 1,
+    "std_dev": 1.22245654319489
+  },
+  "distraction": {
+    "average_score": 7.34,
+    "median_score": 8.0,
+    "max_score": 9,
+    "min_score": 4,
+    "std_dev": 1.050904372433572
+  },
+  "diversity": {
+    "average_score": 7.08,
+    "median_score": 8.0,
+    "max_score": 9,
+    "min_score": 2,
+    "std_dev": 1.9374209661299735
+  },
+  "factual_error": {
+    "average_score": 4.98,
+    "median_score": 6.0,
+    "max_score": 9,
+    "min_score": 0,
+    "std_dev": 3.26490428649907
+  },
+  "gender": {
+    "average_score": 6.96,
+    "median_score": 8.0,
+    "max_score": 9,
+    "min_score": 3,
+    "std_dev": 1.482700239428051
+  },
+  "original": {
+    "average_score": 4.02,
+    "median_score": 2.0,
+    "max_score": 10,
+    "min_score": 1,
+    "std_dev": 3.146362979695763
+  },
+  "original_pipline": {
+    "average_score": 6.96,
+    "median_score": 8.0,
+    "max_score": 10,
+    "min_score": 1,
+    "std_dev": 1.8434749794884662
+  },
+  "reference": {
+    "average_score": 7.1,
+    "median_score": 8.0,
+    "max_score": 10,
+    "min_score": 0,
+    "std_dev": 2.80178514522438
+  },
+  "rich_content": {
+    "average_score": 8.8,
+    "median_score": 9.0,
+    "max_score": 10,
+    "min_score": 5,
+    "std_dev": 0.6633249580710799
+  },
+  "sentiment": {
+    "average_score": 7.78,
+    "median_score": 8.0,
+    "max_score": 9,
+    "min_score": 5,
+    "std_dev": 1.100727032465361
+  },
+  "verbosity": {
+    "average_score": 8.82,
+    "median_score": 9.0,
+    "max_score": 9,
+    "min_score": 8,
+    "std_dev": 0.38418745424597095
+  }
+}

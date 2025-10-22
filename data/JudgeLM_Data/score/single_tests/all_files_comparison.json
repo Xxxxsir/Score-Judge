@@ -1,0 +1,9 @@
+{
+  "llama3igneous_2_dialogue_test": {
+    "average_score": 7.703703703703703,
+    "median_score": 10.0,
+    "max_score": 10,
+    "min_score": 1,
+    "std_dev": 3.6496048980962996
+  }
+}
